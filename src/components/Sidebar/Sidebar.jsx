@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import cl from "./Sidebar.module.scss";
-import { Menu } from "antd";
-import { DownOutlined, CaretDownOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { CaretDownOutlined } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
+
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
   return (
@@ -13,48 +13,102 @@ const Sidebar = () => {
         </div>
         <div className={cl.sidebar__menu}>
           <h2 className={cl.sidebar__menu__title}>MY STORE</h2>
-          <Menu className={cl.sidebar__menu__links}>
-            <Menu.Item>
-              <Link to="/documents">Документы на КК</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/positions">Должности</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/property">Залоговое имущество</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/companies">Компании</Link>
-            </Menu.Item>
-            <li
-              className={cl.sidebar__menu__option}
-              onClick={() => setOpen(!open)}
-            >
-              <span>Option</span>{" "}
+          <ul className={cl.sidebar__menu__links}>
+            <li>
+              <NavLink
+                exact
+                to="/documents"
+                className={({ isActive }) => (isActive ? cl.active : "")}
+              >
+                <span>Документы на КК</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                exact
+                to="/positions"
+                className={({ isActive }) => (isActive ? cl.active : "")}
+              >
+                <span>Должности</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                exact
+                to="/property"
+                className={({ isActive }) => (isActive ? cl.active : "")}
+              >
+                <span>Залоговое имущество</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                exact
+                to="/companies"
+                className={({ isActive }) => (isActive ? cl.active : "")}
+              >
+                <span>Компании</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                exact
+                to="/counterparties"
+                className={({ isActive }) => (isActive ? cl.active : "")}
+              >
+                <span>Контрагенты</span>
+              </NavLink>
+            </li>
+            <li onClick={() => setOpen(!open)}>
+              <span>Option</span>
               <CaretDownOutlined
                 className={`${cl.sidebar__menu__icon} ${open && cl.open}`}
               />
             </li>
             {open && (
               <div className={cl.sidebar__menu__submenu}>
-                <Menu.Item>
-                  <Link to="/option/item1">First Item</Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link to="/option/item2">Second Item</Link>
-                </Menu.Item>
+                <li>
+                  <NavLink
+                    exact
+                    to="/option/item1"
+                    className={({ isActive }) => (isActive ? cl.active : "")}
+                  >
+                    <span>Item1</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    exact
+                    to="/option/item2"
+                    className={({ isActive }) => (isActive ? cl.active : "")}
+                  >
+                    <span>Item2</span>
+                  </NavLink>
+                </li>
               </div>
             )}
-            <Menu.Item>
-              <Link to="/counterparties">Контрагенты</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/credit-specialist">Кредит. спец</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/recipients">Поручители</Link>
-            </Menu.Item>
-          </Menu>
+            <li>
+              <NavLink
+                exact
+                to="/credit-specialist"
+                className={({ isActive }) => (isActive ? cl.active : "")}
+              >
+                <span>Кредит. спец</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                exact
+                to="/recipients"
+                className={({ isActive }) => (isActive ? cl.active : "")}
+              >
+                <span>Поручители</span>
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </div>
     </>
