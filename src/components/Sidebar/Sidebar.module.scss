@@ -1,0 +1,64 @@
+.sidebar {
+  width: 335px;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  .sidebar__dashboard {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-right: none;
+    height: 58px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+  .sidebar__menu {
+    margin-top: 79px;
+    margin-left: 20px;
+    .sidebar__menu__title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
+    .sidebar__menu__links {
+      margin-top: 30px;
+      .sidebar__menu__submenu {
+        margin-left: 20px;
+      }
+      li {
+        padding: 0;
+        height: 40px;
+        margin: 0;
+        margin-top: 10px;
+
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          color: #42b4f4;
+        }
+        .sidebar__menu__icon {
+          width: 15px;
+          height: 15px;
+          margin-left: 10px;
+          margin-top: -10px;
+          &.open {
+            transform: rotate(180deg);
+            margin-top: 15px;
+          }
+        }
+        a{
+          text-decoration: none;
+        }
+        span {
+          font-size: 20px;
+          line-height: 23px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
