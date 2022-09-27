@@ -1,0 +1,18 @@
+.positions {
+  .positions__content {
+    margin-top: 100px;
+    .positions__title {
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 38px;
+    }
+    label {
+      position: relative;
+      margin-top: 20px;
+      width: 100%;
+      span {
+        position: absolute;
+      }
+    }
+  }
+}
