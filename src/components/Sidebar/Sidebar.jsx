@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import cl from "./Sidebar.module.scss";
-import { CaretDownOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const [open, setOpen] = useState(false);
   return (
     <>
       <div className={cl.sidebar}>
@@ -36,16 +34,6 @@ const Sidebar = () => {
             <li>
               <NavLink
                 exact
-                to="/property"
-                className={({ isActive }) => (isActive ? cl.active : "")}
-              >
-                <span>Залоговое имущество</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                exact
                 to="/companies"
                 className={({ isActive }) => (isActive ? cl.active : "")}
               >
@@ -61,44 +49,6 @@ const Sidebar = () => {
                 <span>Контрагенты</span>
               </NavLink>
             </li>
-            <li onClick={() => setOpen(!open)}>
-              <span>Option</span>
-              <CaretDownOutlined
-                className={`${cl.sidebar__menu__icon} ${open && cl.open}`}
-              />
-            </li>
-            {open && (
-              <div className={cl.sidebar__menu__submenu}>
-                <li>
-                  <NavLink
-                    exact
-                    to="/option/item1"
-                    className={({ isActive }) => (isActive ? cl.active : "")}
-                  >
-                    <span>Item1</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    exact
-                    to="/option/item2"
-                    className={({ isActive }) => (isActive ? cl.active : "")}
-                  >
-                    <span>Item2</span>
-                  </NavLink>
-                </li>
-              </div>
-            )}
-            <li>
-              <NavLink
-                exact
-                to="/credit-specialist"
-                className={({ isActive }) => (isActive ? cl.active : "")}
-              >
-                <span>Кредит. спец</span>
-              </NavLink>
-            </li>
-
             <li>
               <NavLink
                 exact
@@ -106,6 +56,15 @@ const Sidebar = () => {
                 className={({ isActive }) => (isActive ? cl.active : "")}
               >
                 <span>Поручители</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                exact
+                to="/conversations"
+                className={({ isActive }) => (isActive ? cl.active : "")}
+              >
+                <span>Тел. переговоры</span>
               </NavLink>
             </li>
           </ul>

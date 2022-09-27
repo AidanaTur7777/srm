@@ -3,7 +3,7 @@ import React from 'react'
 const Counterparties = () => {
   return (
     <div>
-      Counterparties
+      Контрагенты
     </div>
   )
 }

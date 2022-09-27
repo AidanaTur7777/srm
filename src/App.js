@@ -13,7 +13,7 @@ function App() {
           <Sidebar />
           <div className="container">
             <Navbar />
-            <PrivateRoutes/>
+            <PrivateRoutes />
           </div>
         </div>
       </BrowserRouter>

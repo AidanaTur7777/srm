@@ -3,7 +3,7 @@ import React from 'react'
 const Companies = () => {
   return (
     <div>
-      Companies
+      Компании
     </div>
   )
 }
