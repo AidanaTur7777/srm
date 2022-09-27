@@ -1,9 +1,10 @@
+
 import React from "react";
 import cl from "../scss/companies.module.scss";
-
 const Companies = () => {
   return (
     <div>
+
       <section className={cl.companies__container}>
         <div className={cl.inputs__col}>
           <div>
@@ -75,8 +76,11 @@ const Companies = () => {
           </button>
         </div>
       </section>
-    </div>
-  );
-};
+    </div >
+  )
+}
+
+
 
 export default Companies;
+

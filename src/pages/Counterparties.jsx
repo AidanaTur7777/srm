@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import cl from "../scss/counterparties.module.scss";
 
 const Counterparties = () => {
@@ -101,4 +102,13 @@ const Counterparties = () => {
   );
 };
 
+=======
+
+import cl from "../scss/counterparties.module.scss";
+
+const Counterparties = () => {
+  return <div>Контрагенты</div>;
+};
+
+>>>>>>> a667e47565cf383daeed6026a5f56eb7a376962b
 export default Counterparties;

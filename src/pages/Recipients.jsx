@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 import cl from "../scss/recipients.module.scss";;
+=======
+import cl from "../scss/recipients.module.scss";
+import React from "react";
+>>>>>>> a667e47565cf383daeed6026a5f56eb7a376962b
 
 const Recipients = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
