@@ -5,7 +5,9 @@ import cl from "../scss/counterparties.module.scss"
 const Counterparties = () => {
   return (
     <div>
-      Контрагенты
+      <section className="counterparties">
+        
+      </section>
     </div>
   )
 }

@@ -11,7 +11,6 @@ const Companies = () => {
             <input
               className={cl.input__phone}
               type="text"
-
             />
           </div>
           <div>
@@ -34,7 +33,7 @@ const Companies = () => {
             <h2 className={cl.companies__title}>Номер телефона</h2>
             <input
               className={cl.input__phone}
-              type="text"
+              type="number"
 
             />
           </div>
