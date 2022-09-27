@@ -1,0 +1,26 @@
+.navbar {
+  width: 915px;
+  height: 58px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px 0 20px;
+  @media(max-width: 1285px){
+    max-width: 850px;
+  }
+  @media(max-width: 1200px){
+    max-width: 750px;
+  }
+  .navbar__left {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .navbar__right {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.025em;
+  }
+}

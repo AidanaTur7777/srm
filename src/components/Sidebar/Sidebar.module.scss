@@ -1,0 +1,65 @@
+.sidebar {
+  width: 335px;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  @media(max-width: 1285px){
+    max-width:260px;
+  }
+  @media(max-width: 1150px){
+    max-width:220px;
+  }
+  .sidebar__dashboard {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-right: none;
+    height: 58px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+
+  .sidebar__menu {
+    margin-top: 79px;
+    margin-left: 20px;
+    .sidebar__menu__title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
+    .sidebar__menu__links {
+      padding-left: 0;
+      margin-top: 20px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      li {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 30px;
+        cursor: pointer;
+      }
+      a {
+        width: 100%;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+        color: #000;
+        &.active {
+          color: #42b4f4 !important;
+        }
+      }
+      span {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+      }
+    }
+  }
+}
