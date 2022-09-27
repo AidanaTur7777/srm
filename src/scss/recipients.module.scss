@@ -1,0 +1,36 @@
+.recipients__content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 2rem;
+}
+
+.recipients__input {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  width: 482px;
+  height: 60px;
+}
+
+.recipients__btn {
+  background: #42b4f4;
+  border-radius: 5px;
+  width: 264px;
+  height: 63px;
+  color: #fff;
+  font-size: 20px;
+  margin-top: 2rem;
+
+  &:hover {
+    background: darkblue;
+    transition: all 0.5s ease;
+  }
+}
+
+#recipients__accor {
+  width: 157px;
+  height: 53px;
+
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
