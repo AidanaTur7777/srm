@@ -59,8 +59,8 @@ const Recipients = () => {
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
-        ><h1>
-            Ваш залог принят</h1></Modal>
+        ><h2>
+            Ваш залог принят</h2></Modal>
       </section>
     </div>
   );
