@@ -27,7 +27,7 @@ const Conversations = () => {
       </div>
       <div className={cl.conversations__category}>
         <h2 className={cl.conversations__title}>Тема разговора: </h2>
-        <Input height="418px" />
+        <textarea className={cl.conversations__textarea}></textarea>
         <div className={cl.conversations__fileLoader}>
           <span>Загрузить файл</span>
           <GlobalSvgSelector id="clip" />
