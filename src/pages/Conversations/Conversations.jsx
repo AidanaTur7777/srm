@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import GlobalSvgSelector from "../assets/icons/GlobalSvgSelector";
-import Button from "../components/Button/Button";
-import Input from "../components/Input/Input";
-import cl from "../scss/conversations.module.scss";
-import { Radio } from "antd";
+import GlobalSvgSelector from "../../assets/icons/GlobalSvgSelector";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
+import cl from "./conversations.module.scss";
 
 const Conversations = () => {
   return (

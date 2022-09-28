@@ -1,39 +1,36 @@
-.recipients__content {
+.inputs__col {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
-.recipients__input {
+.companies__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+  margin-top: 40px;
+}
+
+.input__phone {
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  width: 482px;
+  width: 393px;
   height: 60px;
+  width: 393px;
+  height: 60px;
+  margin-top: 30px;
 }
-
-.recipients__btn {
+.companies__btn {
   background: #42b4f4;
   border-radius: 5px;
   width: 264px;
   height: 63px;
   color: #fff;
   font-size: 20px;
-  margin-top: 2rem;
 
   &:hover {
     background: darkblue;
     transition: all 0.5s ease;
   }
 }
-
-#recipients__accor {
-  width: 157px;
-  height: 53px;
-
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-}
-
-

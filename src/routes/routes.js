@@ -1,9 +1,9 @@
-import Companies from "../pages/Companies";
-import Counterparties from "../pages/Counterparties";
-import Documents from "../pages/Documents";
-import Positions from "../pages/Positions";
-import Recipients from "../pages/Recipients";
-import Conversations from "../pages/Conversations"
+import Companies from "../pages/Companies/Companies";
+import Counterparties from "../pages/Counterparties/Counterparties";
+import Documents from "../pages/Documents/Documents";
+import Positions from "../pages/Positions/Positions";
+import Recipients from "../pages/Recipients/Recipients";
+import Conversations from "../pages/Conversations/Conversations"
 import { Routes, Route } from "react-router-dom";
 
 

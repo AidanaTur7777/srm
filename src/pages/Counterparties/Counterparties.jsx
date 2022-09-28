@@ -1,6 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
-import cl from "../scss/counterparties.module.scss";
+import Button from "../../components/Button/Button";
+import cl from "./counterparties.module.scss";
 
 const Counterparties = () => {
   return (
@@ -52,63 +52,31 @@ const Counterparties = () => {
 
           <input type="file" />
 
-          <h2>
-            Комания клиента:
-          </h2>
-          <input
-            className={cl.counterparties__input}
-            type="text"
-          />
-          <h2>
-            Залоговое имущество:
-          </h2>
+          <h2>Комания клиента:</h2>
+          <input className={cl.counterparties__input} type="text" />
+          <h2>Залоговое имущество:</h2>
 
-          <input
-            className={cl.counterparties__input}
-            type="text"
-          />
+          <input className={cl.counterparties__input} type="text" />
 
-          <h2>
-            Договора с подрядчиками и поставщиками:
-          </h2>
+          <h2>Договора с подрядчиками и поставщиками:</h2>
           <input type="file" />
-          <h2>
-          Отчёт подрядчиков и поставщиков об оказанной услуге:
-          </h2>
-          <input type="file" /><h2>
-          Отчёт по мониторингу:
-          </h2>
-          <input type="file" /><h2>
-          id guarantor:
-          </h2>
-          <input type="file" /><h2>
-          id company:
-          </h2>
-          <input type="file" /><h2>
-          id property:
-          </h2>
-          <input type="file" /><h2>
-          id num parley
-          </h2>
+          <h2>Отчёт подрядчиков и поставщиков об оказанной услуге:</h2>
           <input type="file" />
-
-          <button className={cl.counterparties__btn}>Submit</button>
+          <h2>Отчёт по мониторингу:</h2>
+          <input type="file" />
+          <h2>id guarantor:</h2>
+          <input type="file" />
+          <h2>id company:</h2>
+          <input type="file" />
+          <h2>id property:</h2>
+          <input type="file" />
+          <h2>id num parley</h2>
+          <input type="file" />
+          <Button/>
         </div>
-
-
-
       </section>
     </div>
   );
 };
 
-=======
-
-import cl from "../scss/counterparties.module.scss";
-
-const Counterparties = () => {
-  return <div>Контрагенты</div>;
-};
-
->>>>>>> a667e47565cf383daeed6026a5f56eb7a376962b
 export default Counterparties;

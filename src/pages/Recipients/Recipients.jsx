@@ -1,11 +1,6 @@
-<<<<<<< HEAD
+import cl from "./recipients.module.scss";
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
-import cl from "../scss/recipients.module.scss";;
-=======
-import cl from "../scss/recipients.module.scss";
-import React from "react";
->>>>>>> a667e47565cf383daeed6026a5f56eb7a376962b
+import { Modal, Button } from "antd";
 
 const Recipients = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,18 +49,28 @@ const Recipients = () => {
           <h2>Document</h2>
           <input type="file" />
         </div>
-        <Button type="primary" onClick={showModal} style={{
-          background: "#42B4F4", width: "324px", height: "63px", fontSize: "20px"
-        }} >
-          Open Modal
+        <Button
+          type="primary"
+          onClick={showModal}
+          style={{
+            background: "#42B4F4",
+            width: "324px",
+            height: "63px",
+            fontSize: "20px",
+            borderRadius: "5px",
+            marginTop: "20px"
+          }}
+        >
+          Submit
         </Button>
         <Modal
           title="Basic Modal"
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
-        ><h2>
-            Ваш залог принят</h2></Modal>
+        >
+          <h2>Ваш залог принят</h2>
+        </Modal>
       </section>
     </div>
   );
