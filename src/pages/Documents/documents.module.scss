@@ -1,0 +1,15 @@
+.documents {
+  padding-top: 20px;
+  .documents__category {
+    margin-top: 50px;
+    position: relative;
+    .documents__title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
+    input {
+      margin-top: 30px;
+    }
+  }
+}
