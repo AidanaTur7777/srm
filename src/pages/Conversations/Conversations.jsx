@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import GlobalSvgSelector from "../../assets/icons/GlobalSvgSelector";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
