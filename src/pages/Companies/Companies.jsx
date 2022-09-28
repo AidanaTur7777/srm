@@ -12,7 +12,7 @@ const Companies = () => {
             <input className={cl.input__phone} type="text" />
           </div>
           <div>
-            <h2 className={cl.companies__title}>Юредический адрес</h2>
+            <h2 className={cl.companies__title}>Юридический адрес</h2>
             <input className={cl.input__phone} type="text" />
           </div>
           <div>

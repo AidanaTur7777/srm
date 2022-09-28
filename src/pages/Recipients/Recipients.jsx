@@ -1,6 +1,7 @@
 import cl from "./recipients.module.scss";
 import React, { useState } from "react";
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
+import Button from "../../components/Button/Button";
 
 const Recipients = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,7 +38,7 @@ const Recipients = () => {
           <input className={cl.recipients__input} type="text" />
 
           <h2>Адрес фактический:</h2>
-          <input className={cl.recipients__input} type="number" />
+          <input className={cl.recipients__input} type="text" />
           <h2>icome startement:</h2>
           <input type="file" />
 
@@ -52,14 +53,14 @@ const Recipients = () => {
         <Button
           type="primary"
           onClick={showModal}
-          style={{
-            background: "#42B4F4",
-            width: "324px",
-            height: "63px",
-            fontSize: "20px",
-            borderRadius: "5px",
-            marginTop: "20px"
-          }}
+          // style={{
+          //   background: "#42B4F4",
+          //   width: "324px",
+          //   height: "63px",
+          //   fontSize: "20px",
+          //   borderRadius: "5px",
+          //   marginTop: "20px"
+          // }}
         >
           Submit
         </Button>
