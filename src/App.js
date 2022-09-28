@@ -1,13 +1,23 @@
-import React from 'react';
-import Side from './components/SideBar/Side'
+import React from "react";
+import Sidebar from "./components/SideBar/Sidebar";
+import "antd/dist/antd.min.css";
+import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter } from "react-router-dom";
+import { PrivateRoutes } from "./routes/routes";
 
 function App() {
   return (
-   <>
-   <div>
-    <Side/>
-   </div>
-   </>
+    <>
+      <BrowserRouter>
+        <div className="App">
+          <Sidebar />
+          <div className="container">
+            <Navbar />
+            <PrivateRoutes />
+          </div>
+        </div>
+      </BrowserRouter>
+    </>
   );
 }
 
