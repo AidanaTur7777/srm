@@ -1,29 +1,55 @@
 .title {
   display: flex;
   justify-content: center;
+  margin-top: 200px !important;
 }
 
-.login_page {
+.registration_page {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
 }
-
 .input {
   width: 393px;
   height: 60px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  left: 523px;
-  top: 359px;
+}
+.name,
+.job,
+.number,
+.login,
+.password {
+  margin: 40px 0px 40px 0px;
+}
+.name {
+  margin: 60px 0px 40px 0px !important;
 }
 
-.login,
-.select {
-  padding: 60px 0px 0px 140px;
+@media (max-width: 320px) {
+  #counterparties__accor,
+  .input {
+    width: 300px !important;
+  }
+  .button {
+    margin-bottom: 30px !important;
+    width: 200px;
+  }
+  .name,
+  .job,
+  .number,
+  .login,
+  .password {
+    margin: 40px 0px 0px 120px !important;
+  }
+  .link {
+    display: flex !important;
+    justify-content: center !important;
+  }
 }
-.password {
-  padding: 40px 0px 0px 140px;
-}
+
 .button {
-  width: 264px;
+  width: 395px;
   height: 63px;
   left: 445px;
   top: 1094px;
@@ -33,10 +59,15 @@
   line-height: 23px;
   color: #ffffff;
   border: none;
-  margin-top: 50px;
+  margin: 50px 0px 195px 0px;
+}
+button:hover {
+  color: #001f3f;
+  background-color: #01598d;
 }
 .link {
-  padding: 10px 0px 0px 490px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 #counterparties__accor {

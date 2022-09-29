@@ -17,6 +17,7 @@
   border-radius: 5px;
   width: 482px;
   height: 60px;
+  padding: 4px 10px;
 }
 
 .recipients__btn {
@@ -29,7 +30,7 @@
   margin-top: 2rem;
 
   &:hover {
-    background: darkblue;
+    background: #226486;
     transition: all 0.5s ease;
   }
 }
