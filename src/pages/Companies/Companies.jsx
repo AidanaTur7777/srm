@@ -21,7 +21,7 @@ const Companies = () => {
         </div>
         <div className={cl.companies__category}>
           <h2 className={cl.companies__title}>Номер телефона</h2>
-          <input className={cl.companies__input} type="number" />
+          <input className={cl.companies__input} type="text" />
         </div>
         <div className={cl.companies__category}>
           <h2 className={cl.companies__title}>Сфера деятельности</h2>
