@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { SidebarContext } from "../../context";
 import cl from "./Navbar.module.scss";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineMenu } from "react-icons/md"
 
 const Navbar = () => {

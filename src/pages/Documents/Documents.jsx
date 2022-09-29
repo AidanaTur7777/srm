@@ -1,5 +1,4 @@
 import React from "react";
-import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import cl from "./documents.module.scss";
 
@@ -24,15 +23,15 @@ const Documents = () => {
       </div>
       <div className={cl.documents__category}>
         <h2 className={cl.documents__title}>Скоринг:</h2>
-        <Input width="393px" height="60px" />
+        <input className={cl.documents__input}/>
       </div>
       <div className={cl.documents__category}>
         <h2 className={cl.documents__title}>id client:</h2>
-        <Input width="393px" height="47px" />
+        <input className={`${cl.documents__input} ${cl.documents__input__short}`}/>
       </div>
       <div className={cl.documents__category}>
         <h2 className={cl.documents__title}>id spec:</h2>
-        <Input width="393px" height="47px" />
+        <input className={`${cl.documents__input} ${cl.documents__input__short}`}/>
       </div>
       <Button/>
     </div>

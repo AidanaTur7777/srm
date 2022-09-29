@@ -3,11 +3,26 @@
     display: flex;
     margin-top: 40px;
     padding-bottom: 30px;
+    width: 100%;
+    @media (max-width: 555px) {
+      flex-direction: column;
+    }
     label {
       display: flex;
       align-items: center;
+      width: 100%;
+      @media (max-width: 555px) {
+        width: 400px;
+      }
+      @media (max-width: 455px) {
+        width: 100%;
+      }
       &:last-child {
         margin-left: 46px;
+        @media (max-width: 555px) {
+          margin-left: 0;
+          margin-top: 20px;
+        }
       }
       span {
         font-weight: 400;
@@ -25,15 +40,32 @@
     width: 482px;
     margin-top: 50px;
     position: relative;
+    @media(max-width:555px){
+      width: 100%;
+    }
     .conversations__title {
       font-weight: 400;
       font-size: 24px;
       line-height: 28px;
     }
+    .conversations__input {
+      width: 482px;
+      height: 60px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      border-radius: 5px;
+      margin-top: 30px;
+      @media (max-width: 555px) {
+        width: 100%;
+      }
+    }
     .conversations__fileLoader {
       margin-top: 10px;
       position: absolute;
       right: 0;
+      @media (max-width: 555px) {
+        left: 0;
+        right: 50%;
+      }
       cursor: pointer;
       span {
         font-weight: 400;
@@ -42,8 +74,12 @@
       }
       svg {
         margin-left: 10px;
+        @media (max-width: 555px) {
+          margin-left: 0px;
+        }
       }
     }
+
     .conversations__textarea {
       width: 482px;
       height: 418px;
@@ -51,6 +87,9 @@
       border-radius: 5px;
       margin-top: 30px;
       padding: 10px;
+      @media (max-width: 555px) {
+        width: 100%;
+      }
     }
   }
   button {

@@ -16,6 +16,7 @@
 
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
+  
 }
 
 .block__input {
@@ -36,6 +37,12 @@
     height: 60px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 5px;
+    @media (max-width: 555px) {
+      width: 400px;
+    }
+    @media (max-width: 455px) {
+      width: 100%;
+    }
   }
 }
 
@@ -44,6 +51,12 @@
   height: 60px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
+  @media (max-width: 555px) {
+    width: 400px;
+  }
+  @media (max-width: 455px) {
+    width: 100%;
+  }
 }
 
 .counterparties__input::placeholder {
@@ -59,19 +72,5 @@
   &::-ms-input-placeholder {
     /* Microsoft Edge */
     color: gray;
-  }
-}
-
-.counterparties__btn {
-  background: #42b4f4;
-  border-radius: 5px;
-  width: 264px;
-  height: 63px;
-  color: #fff;
-  font-size: 20px;
-
-  &:hover {
-    background: darkblue;
-    transition: all 0.5s ease;
   }
 }

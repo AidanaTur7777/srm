@@ -17,6 +17,12 @@
   border-radius: 5px;
   width: 482px;
   height: 60px;
+  @media (max-width: 555px) {
+    width: 400px;
+  }
+  @media (max-width: 455px) {
+    width: 100%;
+  }
 }
 
 .recipients__btn {
