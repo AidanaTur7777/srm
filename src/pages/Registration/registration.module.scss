@@ -1,0 +1,81 @@
+.title {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px !important;
+  font-weight: 400;
+
+}
+
+.registration_page {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+}
+.input {
+  width: 393px;
+  height: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 4px 10px;
+}
+.name,
+.job,
+.number,
+.login,
+.password {
+  margin: 40px 0px 40px 0px;
+}
+.name {
+  margin: 60px 0px 40px 0px !important;
+}
+
+@media (max-width: 320px) {
+  #counterparties__accor,
+  .input {
+    width: 300px !important;
+  }
+  .button {
+    margin-bottom: 30px !important;
+    width: 200px;
+  }
+  .name,
+  .job,
+  .number,
+  .login,
+  .password {
+    margin: 40px 0px 0px 120px !important;
+  }
+  .link {
+    display: flex !important;
+    justify-content: center !important;
+  }
+}
+
+.button {
+  width: 395px;
+  height: 63px;
+  left: 445px;
+  top: 1094px;
+  background: #42b4f4;
+  border-radius: 5px;
+  font-size: 20px;
+  line-height: 23px;
+  color: #ffffff;
+  border: none;
+  margin: 50px 0px 195px 0px;
+}
+button:hover {
+  color: #001f3f;
+  background-color: #01598d;
+}
+.link {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#counterparties__accor {
+  width: 393px;
+  height: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}

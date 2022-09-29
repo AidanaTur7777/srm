@@ -15,3 +15,13 @@
 
   }
 }
+.button:hover {
+  background-color: #226486;
+  transition: all 0.5s ease;
+}
+
+@media (max-width: 375px) {
+  .button {
+    width: 150px;
+  }
+}
