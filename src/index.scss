@@ -11,6 +11,9 @@ body {
   justify-content: center;
   background-color: #d2d2d2;
 }
+#root{
+  width: 100%;
+}
 .App {
   width: 100%;
   min-height: 100vh;
@@ -44,6 +47,9 @@ body {
     @media (max-width: 800px) {
       width: 100%;
       margin-left: 0;
+    }
+    @media(max-width:455px){
+      max-width:455px;
     }
   }
 }
