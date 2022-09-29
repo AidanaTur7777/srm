@@ -1,9 +1,10 @@
+import classNames from 'classnames'
 import React from 'react'
 import cl from './Login.module.scss'
 
 const Login = () => {
   return (
-    <div className={cl.login_page}>
+    <div className={classNames(cl.login_page, 'row')}>
       <div className={cl.title}>
         <h1>Вход</h1>
       </div>
