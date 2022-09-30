@@ -54,3 +54,8 @@ body {
 a {
   text-decoration: none !important;
 }
+
+.ant-btn-primary:hover {
+  background-color: #68C9FF !important;
+  transition: all 0.5s ease !important;
+}
