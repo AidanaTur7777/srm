@@ -20,8 +20,9 @@
     max-width: 100%;
     transition: all 0.8s;
     transform: translateX(-100%);
-    display: none;
-    svg{
+    position: fixed;
+    left: -100%;
+    svg {
       display: block;
     }
     &.sidebar__open {
@@ -47,7 +48,7 @@
       top: 80px;
       right: 20px;
       cursor: pointer;
-      &:hover{
+      &:hover {
         transform: scale(1.1);
       }
     }
