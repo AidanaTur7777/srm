@@ -3,13 +3,16 @@
   justify-content: center;
   margin-top: 200px !important;
   font-weight: 400;
-
 }
-
 .registration_page {
   display: flex !important;
   flex-direction: column;
   align-items: center;
+  h4 {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+  }
 }
 .input {
   width: 393px;
@@ -66,7 +69,7 @@
 }
 button:hover {
   color: #001f3f;
-  background-color: #68C9FF;
+  background-color: #68c9ff;
 }
 .link {
   display: flex;
