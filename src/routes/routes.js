@@ -6,26 +6,28 @@ import Recipients from "../pages/Recipients/Recipients";
 import Conversations from "../pages/Conversations/Conversations"
 import { Routes, Route } from "react-router-dom";
 import Login from "../pages/Login/Login";
-import Registration from "../pages/Registration/Registration";
+import RegistrationSpec from "../pages/RegistrationSpec/RegistrationSpec";
+import Registration from "../pages/RegistrationClient/RegistrationClient";
 
 export const PrivateRoutes = () => {
   return (
     <Routes>
-      <Route path="/documents" element={<Documents/>} />
+      <Route path="/documents" element={<Documents />} />
       <Route path="/positions" element={<Positions />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/counterparties" element={<Counterparties />} />
       <Route path="/recipients" element={<Recipients />} />
-      <Route path="/conversations" element={<Conversations/>} />
+      <Route path="/conversations" element={<Conversations />} />
       <Route path="/*" element={<Documents />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/registration" element={<Registration />} />
+      <Route path="/registrationSpec" element={<RegistrationSpec />} />
+      <Route path="registrationClient" element={<Registration />} />
     </Routes>
   );
 };
 
-export const PublicRoutes=()=>{
-    return(
-        <></>
-    )
+export const PublicRoutes = () => {
+  return (
+    <></>
+  )
 }
