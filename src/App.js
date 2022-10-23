@@ -10,7 +10,7 @@ function App() {
     <>
       <BrowserRouter>
         <SidebarContext.Provider value={{ sidebarOpen, setSidebarOpen }}>
-          <PrivateRoutes/>
+          <PrivateRoutes />
         </SidebarContext.Provider>
       </BrowserRouter>
     </>

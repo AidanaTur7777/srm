@@ -1,41 +1,42 @@
-import classNames from 'classnames'
-import React from 'react'
-import cl from './registration.module.scss'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import Error from '../../components/Error'
-import { registerUser } from '../../features/user/userActions'
+import classNames from "classnames";
+import React from "react";
+import cl from "./registration.module.scss";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Error from "../../components/Error";
+import { registerUser } from "../../features/user/userActions";
 
 const Registration = () => {
-  const [customError, setCustomError] = useState(null)
+  const [customError, setCustomError] = useState(null);
 
   const { loading, userInfo, error, success } = useSelector(
     (state) => state.user
-  )
-  const dispatch = useDispatch()
+  );
+  const dispatch = useDispatch();
 
-  const { register, handleSubmit } = useForm()
-  const navigate = useNavigate()
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (success) navigate('/login')
-  }, [navigate, userInfo, success])
+    if (success) navigate("/login");
+  }, [navigate, userInfo, success]);
 
   const submitForm = (data) => {
-    console.log(data)
+    console.log(data);
     if (data.password !== data.password_confirm) {
-      setCustomError('Password mismatch')
-      return
+      setCustomError("Password mismatch");
+      return;
     }
-    data.email = data.email.toLowerCase()
+    data.email = data.email.toLowerCase();
 
-    dispatch(registerUser(data))
-  }
+    dispatch(registerUser(data));
+  };
   return (
     <form
-      className={classNames(cl.registration_page, 'row')}
+      className={classNames(cl.registration_page, "row")}
       onSubmit={handleSubmit(submitForm)}
     >
       <div className={cl.title}>
@@ -48,7 +49,7 @@ const Registration = () => {
         <input
           type="text"
           className={cl.input}
-          {...register('full_name')}
+          {...register("full_name")}
           required
         />
       </div>
@@ -57,18 +58,18 @@ const Registration = () => {
         <input
           className={cl.input}
           type="tel"
-          {...register('phone_number')}
+          {...register("phone_number")}
           required
         />
       </div>
       <div className={cl.job}>
         <h4 className={cl.job_title}>Должность:</h4>
-        <select {...register('occupation')} required>
+        <select {...register("occupation")} required>
           {/* <option value="Выбрать" {...register('occupation')} required></option> */}
-          <option value="admin" {...register('admin')} required>
+          <option value="admin" {...register("admin")} required>
             Кредит.админ
           </option>
-          <option value="spec" {...register('spec')} required>
+          <option value="spec" {...register("spec")} required>
             Кредит.спец
           </option>
         </select>
@@ -78,7 +79,7 @@ const Registration = () => {
         <h4 className={cl.login_title}>Логин:</h4>
         <input
           type="email"
-          {...register('email')}
+          {...register("email")}
           required
           className={cl.input}
         />
@@ -88,7 +89,7 @@ const Registration = () => {
         <input
           type="password"
           className={cl.input}
-          {...register('password')}
+          {...register("password")}
           required
         />
       </div>
@@ -97,12 +98,12 @@ const Registration = () => {
         <input
           type="password"
           className={cl.input}
-          {...register('password_confirm')}
+          {...register("password_confirm")}
           required
         />
       </div>
       <div className={cl.link}>
-        <a href="/login">Войти</a>
+        <NavLink to="/login">Войти</NavLink>
       </div>
       <div className="d-flex justify-content-center">
         <button className={cl.button} type="submit" disabled={loading}>
@@ -110,7 +111,7 @@ const Registration = () => {
         </button>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default Registration
+export default Registration;

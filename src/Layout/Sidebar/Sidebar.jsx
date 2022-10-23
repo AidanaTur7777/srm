@@ -82,7 +82,7 @@ const Sidebar = () => {
                 className={({ isActive }) => (isActive ? cl.active : "")}
                 onClick={() => clickHandler()}
               >
-                <span>Тел. переговоры</span>
+                <span>Переговоры</span>
               </NavLink>
             </li>
           </ul>
