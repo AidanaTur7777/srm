@@ -1,0 +1,27 @@
+.registration {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .registration__content {
+    display: flex;
+    flex-direction: column;
+    button {
+      width: 364px;
+      height: 63px;
+      left: 445px;
+      top: 1094px;
+      background: #42b4f4;
+      border-radius: 5px;
+      font-size: 20px;
+      line-height: 23px;
+      color: #ffffff;
+      border: none;
+      margin-top: 20px;
+      @media (max-width: 555px) {
+        max-width: 100%;
+      }
+    }
+  }
+}

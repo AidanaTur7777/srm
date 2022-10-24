@@ -1,14 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import cl from "./Sidebar.module.scss";
 import { NavLink } from "react-router-dom";
 import { SidebarContext } from "../../context";
 import { CloseOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserDetails } from "../../features/user/userActions";
+import { logout } from "../../features/user/userSlice";
 
 const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarContext);
   const clickHandler = () => {
     setSidebarOpen(false);
   };
+  const { userToken } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getUserDetails());
+    }
+  }, [userToken, dispatch]);
   return (
     <>
       <div className={`${cl.sidebar} ${sidebarOpen && cl.sidebar__open}`}>
@@ -84,6 +94,9 @@ const Sidebar = () => {
               >
                 <span>Переговоры</span>
               </NavLink>
+            </li>
+            <li>
+              <a onClick={() => dispatch(logout())}>Выйти</a>
             </li>
           </ul>
         </div>

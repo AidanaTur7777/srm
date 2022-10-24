@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.min.css";
 import { BrowserRouter } from "react-router-dom";
-import { PrivateRoutes } from "./routes/routes";
+import { PrivateRoutes, PublicRoutes } from "./routes/routes";
 import { SidebarContext } from "./context";
+import { useSelector } from "react-redux";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { userInfo } = useSelector((state) => state.user);
   return (
     <>
       <BrowserRouter>
         <SidebarContext.Provider value={{ sidebarOpen, setSidebarOpen }}>
-          <PrivateRoutes />
+          {localStorage.getItem("userToken")!=undefined ? <PrivateRoutes /> : <PublicRoutes />}
         </SidebarContext.Provider>
       </BrowserRouter>
     </>

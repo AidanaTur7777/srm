@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useContext } from "react";
 import cl from "./Login.module.scss";
 import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -8,22 +8,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../features/user/userActions";
 import { useEffect } from "react";
 import Error from "../../components/Error";
+import { SidebarContext } from "../../context";
 
 const Login = () => {
   const { loading, userInfo, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  const { userIsAuth,setUserIsAuth }=useContext(SidebarContext);
   const { register, handleSubmit } = useForm();
-
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
-
+  const navigate=useNavigate();
   const submitForm = (data) => {
     dispatch(userLogin(data));
+    navigate("/documents");
   };
 
   return (
@@ -55,7 +50,7 @@ const Login = () => {
         />
       </div>
       <div className={cl.link} style={{ marginTop: "10px" }}>
-        <NavLink to="/registrationSpec">Регистрация</NavLink>
+        <NavLink to="/registrationChoice">Регистрация</NavLink>
       </div>
       <div className="d-flex justify-content-center">
         <button className={cl.button} type="submit" disabled={loading}>

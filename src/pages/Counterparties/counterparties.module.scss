@@ -9,6 +9,42 @@
     line-height: 28px;
     margin-top: 20px;
   }
+  .counterparties__checkboxes {
+    display: flex;
+    margin-top: 40px;
+    padding-bottom: 20px;
+    width: 100%;
+    @media (max-width: 555px) {
+      flex-direction: column;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      @media (max-width: 555px) {
+        width: 400px;
+      }
+      @media (max-width: 455px) {
+        width: 100%;
+      }
+      &:last-child {
+        @media (max-width: 555px) {
+          margin-left: 0;
+          margin-top: 20px;
+        }
+      }
+      span {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+      }
+      input {
+        width: 24px;
+        height: 24px;
+        margin-left: 10px;
+      }
+    }
+  }
 }
 #counterparties__accor {
   width: 157px;
@@ -16,7 +52,7 @@
 
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  
+  cursor: pointer;
 }
 
 .block__input {

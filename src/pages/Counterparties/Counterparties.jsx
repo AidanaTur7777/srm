@@ -1,79 +1,157 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 import Layout from "../../Layout/Layout";
 import cl from "./counterparties.module.scss";
 
 const Counterparties = () => {
+  const [value, setValue] = useState(1);
+  function changeValue(e) {
+    setValue(e.target.value);
+  }
   return (
     <Layout>
       <div>
         <section className={cl.counterparties__container}>
           <div className={cl.counterparties__content}>
-            <h2>ФИО клиента:</h2>
-            <input className={cl.counterparties__input} type="text" />
-            <h2>Тип кредита:</h2>
-            <select id={cl.counterparties__accor}>
-              <option value="Выбрать">Выбрать</option>
-            </select>
+            <div className={cl.counterparties__checkboxes}>
+              <label>
+                <span>Физические лица</span>
+                <input
+                  type="radio"
+                  name="radio"
+                  value="1"
+                  checked={value == "1" ? true : false}
+                  onChange={changeValue}
+                />
+              </label>
+              <label>
+                <span>Юридические лица</span>
+                <input
+                  type="radio"
+                  name="radio"
+                  value="2"
+                  checked={value === "2" ? true : false}
+                  onChange={changeValue}
+                />
+              </label>
+            </div>
+            {value == 1 ? (
+              <>
+                <h2>ФИО клиента:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Тип кредита:</h2>
+                <select id={cl.counterparties__accor}>
+                  <option value="Выбрать">Выбрать</option>
+                </select>
 
-            <h2>Статус клиента:</h2>
-            <input className={cl.counterparties__input} type="text" />
-            <h2>Сумма кредита:</h2>
+                <h2>Статус клиента:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Сумма кредита:</h2>
 
-            <p className={cl.block__input}>
-              <span>Введите нужную сумму</span>
-              <input className={cl.counterparties__input} type="text" />
-            </p>
+                <p className={cl.block__input}>
+                  <span>Введите нужную сумму</span>
+                  <input className={cl.counterparties__input} type="text" />
+                </p>
 
-            <h2>Семейное положение:</h2>
-            <select id={cl.counterparties__accor}>
-              <option value="Выбрать">Выбрать</option>
-            </select>
+                <h2>Семейное положение:</h2>
+                <select id={cl.counterparties__accor}>
+                  <option value="Выбрать">Выбрать</option>
+                </select>
 
-            <h2>Кредитная история</h2>
-            <input type="file" />
+                <h2>Кредитная история</h2>
+                <input type="file" />
 
-            <h2>Номер телефона:</h2>
-            <input className={cl.counterparties__input} type="text" />
+                <h2>Номер телефона:</h2>
+                <input className={cl.counterparties__input} type="text" />
 
-            <h2>Адрес прописки:</h2>
-            <input className={cl.counterparties__input} type="text" />
+                <h2>Адрес прописки:</h2>
+                <input className={cl.counterparties__input} type="text" />
 
-            <h2>Адрес фактический</h2>
-            <input
-              className={cl.counterparties__input}
-              type="text"
-              placeholder="Тот же что и по прописке"
-            />
+                <h2>Адрес фактический</h2>
+                <input
+                  className={cl.counterparties__input}
+                  type="text"
+                  placeholder="Тот же что и по прописке"
+                />
 
-            <h2>Поручитель:</h2>
+                <h2>Поручитель:</h2>
 
-            <input className={cl.counterparties__input} type="text" />
+                <input className={cl.counterparties__input} type="text" />
 
-            <h2>Справка о доходах:</h2>
+                <h2>Справка о доходах:</h2>
 
-            <input type="file" />
+                <input type="file" />
 
-            <h2>Комания клиента:</h2>
-            <input className={cl.counterparties__input} type="text" />
-            <h2>Залоговое имущество:</h2>
+                <h2>Комания клиента:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Залоговое имущество:</h2>
 
-            <input className={cl.counterparties__input} type="text" />
+                <input className={cl.counterparties__input} type="text" />
 
-            <h2>Договора с подрядчиками и поставщиками:</h2>
-            <input type="file" />
-            <h2>Отчёт подрядчиков и поставщиков об оказанной услуге:</h2>
-            <input type="file" />
-            <h2>Отчёт по мониторингу:</h2>
-            <input type="file" />
-            <h2>id guarantor:</h2>
-            <input type="file" />
-            <h2>id company:</h2>
-            <input type="file" />
-            <h2>id property:</h2>
-            <input type="file" />
-            <h2>id num parley</h2>
-            <input type="file" />
+                <h2>Договора с подрядчиками и поставщиками:</h2>
+                <input type="file" />
+                <h2>Отчёт подрядчиков и поставщиков об оказанной услуге:</h2>
+                <input type="file" />
+                <h2>Отчёт по мониторингу:</h2>
+                <input type="file" />
+                <h2>id guarantor:</h2>
+                <input type="file" />
+                <h2>id company:</h2>
+                <input type="file" />
+                <h2>id property:</h2>
+                <input type="file" />
+                <h2>id num parley</h2>
+                <input type="file" />
+              </>
+            ) : (
+              <>
+                <h2>ФИО председателя:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Компания клиента:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>ИНН</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Тип кредита:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Сумма кредита:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Кредитная история:</h2>
+                <select id={cl.counterparties__accor}>
+                  <option value="Выбрать">LS</option>
+                  <option value="Выбрать">CR</option>
+                </select>
+                <h2>Телефон компании:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Юридический адрес:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Фактический адрес:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Залоговое имущество:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Договора с порядчиками и постовщиками:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Отчёт порядчиков и поставщиков об оказанной услуге:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Отчёт по мониторингу:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Источник дохода:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Средний доход в месяц:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Размер собственного вклада:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Активы на момент анализа:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Текущие кредиты:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Кредитный спец:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Залоговое имущество:</h2>
+                <input className={cl.counterparties__input} type="text" />
+                <h2>Переговоры:</h2>
+                <input className={cl.counterparties__input} type="text" />
+              </>
+            )}
             <Button />
           </div>
         </section>
