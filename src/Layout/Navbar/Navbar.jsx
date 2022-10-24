@@ -5,9 +5,9 @@ import { MdOutlineMenu } from 'react-icons/md'
 import { useLocation } from 'react-router'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 import { getUserDetails } from '../../features/user/userActions'
-import { logout } from '../../features/user/userSlice'
+// import { logout } from '../../features/user/userSlice'
 
 const Navbar = () => {
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarContext)
@@ -40,7 +40,7 @@ const Navbar = () => {
   }, [userToken, dispatch])
   return (
     <div className={cl.navbar}>
-      <span>
+      {/* <span>
           {userInfo ? `Logged in as ${userInfo.email}` : "You're not logged in"}
         </span>
         <div className='cta'>
@@ -53,7 +53,7 @@ const Navbar = () => {
               Login
             </NavLink>
           )}
-          </div>
+          </div> */}
       <h2 className={cl.navbar__left}>
         <MdOutlineMenu
           className={cl.navbar__burger}
