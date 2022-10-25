@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import Layout from "../../Layout/Layout";
 import cl from "./counterparties.module.scss";
+import {motion} from 'framer-motion'
 
 const Counterparties = () => {
   const { loading, userInfo, error } = useSelector((state) => state.user);
@@ -13,7 +14,12 @@ const Counterparties = () => {
   return (
     <Layout>
       <div>
-        <section className={cl.counterparties__container}>
+        <motion.section
+          initial={{ x: "0", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 2 }}
+          className={cl.counterparties__container}
+        >
           <div className={cl.counterparties__content}>
             <h2>ФИО клиента:</h2>
             <input className={cl.counterparties__input} type="text" />
@@ -82,7 +88,7 @@ const Counterparties = () => {
             <input type="file" />
             <Button />
           </div>
-        </section>
+        </motion.section>
       </div>
     </Layout>
   );

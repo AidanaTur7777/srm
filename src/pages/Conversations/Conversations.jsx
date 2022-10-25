@@ -3,9 +3,9 @@ import GlobalSvgSelector from "../../assets/icons/GlobalSvgSelector";
 import Button from "../../components/Button/Button";
 import Layout from "../../Layout/Layout";
 import cl from "./conversations.module.scss";
+import {motion} from 'framer-motion'
 
 const Conversations = () => {
-
   const [value, setValue] = useState(1);
 
   function changeValue(e) {
@@ -13,7 +13,12 @@ const Conversations = () => {
   }
   return (
     <Layout>
-      <div className={cl.conversations}>
+      <motion.div
+        initial={{ x: "0", opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.3, duration: 2 }}
+        className={cl.conversations}
+      >
         <div className={cl.conversations__checkboxes}>
           <label>
             <span>Телефонные разговоры</span>
@@ -49,12 +54,17 @@ const Conversations = () => {
           <textarea className={cl.conversations__textarea}></textarea>
           <div className={cl.conversations__fileLoader}>
             <label for="upload-photo">Загрузить</label>
-            <input type="file" name="photo" id="upload-photo" style={{opacity: 0, position: "absolute"}} />
+            <input
+              type="file"
+              name="photo"
+              id="upload-photo"
+              style={{ opacity: 0, position: "absolute" }}
+            />
             <GlobalSvgSelector id="clip" />
           </div>
         </div>
         <Button />
-      </div>
+      </motion.div>
     </Layout>
   );
 };

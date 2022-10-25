@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import Button from "../../components/Button/Button";
 import cl from "./companies.module.scss";
 import Layout from "../../Layout/Layout";
+import {motion} from 'framer-motion'
+ 
 
 const Companies = () => {
-
-  
   return (
     <Layout>
-      <div className={cl.companies}>
+      <motion.div
+        initial={{ x: "0", opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.3, duration: 2 }}
+        className={cl.companies}
+      >
         <div className={cl.companies__category}>
           <h2 className={cl.companies__title}>Наименование компании</h2>
           <input className={cl.companies__input} type="text" />
@@ -43,7 +48,7 @@ const Companies = () => {
         </div>
 
         <Button />
-      </div>
+      </motion.div>
     </Layout>
   );
 };

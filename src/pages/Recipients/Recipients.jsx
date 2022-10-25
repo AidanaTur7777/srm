@@ -2,6 +2,7 @@ import cl from "./recipients.module.scss";
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
 import Layout from "../../Layout/Layout";
+import { motion } from "framer-motion";
 
 const Recipients = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +22,12 @@ const Recipients = () => {
   return (
     <Layout>
       <div>
-        <section className={cl.recipients__container}>
+        <motion.section
+          className={cl.recipients__container}
+          initial={{ x: "0", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 2 }}
+        >
           <div className={cl.recipients__content}>
             <h2>ФИО залогодателя</h2>
             <input className={cl.recipients__input} type="text" />
@@ -61,7 +67,6 @@ const Recipients = () => {
               fontSize: "20px",
               borderRadius: "5px",
               marginTop: "20px",
-              
             }}
           >
             Submit
@@ -74,7 +79,7 @@ const Recipients = () => {
           >
             <h2>Ваш залог принят</h2>
           </Modal>
-        </section>
+        </motion.section>
       </div>
     </Layout>
   );
