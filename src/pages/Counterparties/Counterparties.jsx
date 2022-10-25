@@ -1,9 +1,15 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
 import Layout from "../../Layout/Layout";
 import cl from "./counterparties.module.scss";
 
 const Counterparties = () => {
+  const { loading, userInfo, error } = useSelector((state) => state.user);
+  const { register, handleSubmit } = useForm();
+
+  const dispatch = useDispatch();
   return (
     <Layout>
       <div>

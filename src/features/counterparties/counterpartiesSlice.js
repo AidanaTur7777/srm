@@ -2,19 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const companyForm = createAsyncThunk(
+export const counterForm = createAsyncThunk(
   "company",
   async (
     {
       id,
-      company_name,
-      inn,
-      legal_address,
-      actual_address,
-      telephone,
-      okpo,
-      register_number,
-      field_activity,
+      full_name,
+      credit_type,
+      status,
+      credit_sum,
+      marital_status,
+      phone,
+      address,
+      client_actual_address,
+      guarantor,
+      mortgaged_property,
+      id_guarantor,
+      id_property,
+      meet_conversation,
     },
     { rejectWithValue }
   ) => {
@@ -26,17 +31,22 @@ export const companyForm = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/auth/jwt/create/`,
+        `https://baitushumdemo.herokuapp.com/crm/api/client/`,
         {
           id,
-          company_name,
-          inn,
-          legal_address,
-          actual_address,
-          telephone,
-          okpo,
-          register_number,
-          field_activity,
+          full_name,
+          credit_type,
+          status,
+          credit_sum,
+          marital_status,
+          phone,
+          address,
+          client_actual_address,
+          guarantor,
+          mortgaged_property,
+          id_guarantor,
+          id_property,
+          meet_conversation,
         },
         config
       );
@@ -54,23 +64,24 @@ export const companyForm = createAsyncThunk(
 const initialState = {
   loading: false,
   error: null,
+  success: true,
 };
 
 const userSlice = createSlice({
-  name: "company",
+  name: "counterparties",
   initialState,
   reducers: {},
   extraReducers: {
-    [companyForm.pending]: (state) => {
+    [counterForm.pending]: (state) => {
       state.loading = true;
       state.error = null;
     },
-    [companyForm.fulfilled]: (state, { payload }) => {
+    [counterForm.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.userInfo = payload;
       state.userToken = payload.userToken;
     },
-    [companyForm.rejected]: (state, { payload }) => {
+    [counterForm.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },
@@ -79,4 +90,4 @@ const userSlice = createSlice({
 
 export const { logout } = userSlice.actions;
 
-export default companyForm.reducer;
+export default counterForm.reducer;

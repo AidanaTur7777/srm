@@ -34,6 +34,7 @@ const Registration = () => {
 
     dispatch(registerUser(data));
   };
+
   return (
     <form
       className={classNames(cl.registration_page, "row")}
@@ -65,7 +66,7 @@ const Registration = () => {
       <div className={cl.job}>
         <h4 className={cl.job_title}>Должность:</h4>
         <select {...register("occupation")} required>
-          {/* <option value="Выбрать" {...register('occupation')} required></option> */}
+        {/* <option value="Выбрать" {...register('occupation')} required></option> */}
           <option value="admin" {...register("admin")} required>
             Кредит.админ
           </option>
@@ -77,8 +78,10 @@ const Registration = () => {
 
       <div className={cl.login}>
         <h4 className={cl.login_title}>Логин:</h4>
+
         <input
           type="email"
+          name="email"
           {...register("email")}
           required
           className={cl.input}
@@ -86,6 +89,7 @@ const Registration = () => {
       </div>
       <div className={cl.password}>
         <h4 className={cl.password_title}>Пароль:</h4>
+
         <input
           type="password"
           className={cl.input}
