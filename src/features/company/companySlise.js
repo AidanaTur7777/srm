@@ -44,7 +44,7 @@ export const fetchActivity = createAsyncThunk(
             }
 
             await axios.post(
-                `https://baitushumdemo.herokuapp.com/crm/api/activity`,
+                `https://baitushumdemo.herokuapp.com/crm/api/activity/`,
                 { id, activites_add },
                 config
             )

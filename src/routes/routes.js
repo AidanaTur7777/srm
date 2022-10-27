@@ -9,16 +9,18 @@ import Login from "../pages/Login/Login";
 import RegistrationSpec from "../pages/RegistrationSpec/RegistrationSpec";
 import Registration from "../pages/RegistrationClient/RegistrationClient";
 import RegistrationChoice from "../pages/RegistrationChoice/RegistrationChoice";
+import RecipientsContainer from "../pages/Recipients/RecipientsContainer";
+import MortgagedProperty from "../pages/MortgagedProperty/MortgagedProperty";
 
 export const PrivateRoutes = () => {
   return (
     <Routes>
       <Route path="/documents" element={<Documents />} />
-      <Route path="/positions" element={<Positions />} />
       <Route path="/companies" element={<Companies />} />
       <Route path="/counterparties" element={<Counterparties />} />
-      <Route path="/recipients" element={<Recipients />} />
+      <Route path="/recipients" element={<RecipientsContainer/>} />
       <Route path="/conversations" element={<Conversations />} />
+      <Route path="/mortgaged-property" element={<MortgagedProperty/>} />
       <Route path="/*" element={<Documents />} />
     </Routes>
   );

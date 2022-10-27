@@ -44,15 +44,14 @@ const Sidebar = () => {
                 <span>Документы на КК</span>
               </NavLink>
             </li>
-
-            {/* <li>
+            <li>
               <NavLink
                 exact
-                to="/positions"
+                to="/mortgaged-property"
                 className={({ isActive }) => (isActive ? cl.active : "")}
                 onClick={() => clickHandler()}
               >
-                <span>Должности</span>
+                <span>Залоговое имущество</span>
               </NavLink>
             </li> */}
             <li>

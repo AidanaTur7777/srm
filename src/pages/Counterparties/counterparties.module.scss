@@ -45,6 +45,12 @@
       }
     }
   }
+  .add__svg{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
 }
 #counterparties__accor {
   width: 157px;
@@ -53,6 +59,15 @@
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   cursor: pointer;
+}
+.counterparties__accor {
+  width: 227px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+  span{
+    cursor: pointer;
+  }
 }
 
 .block__input {
