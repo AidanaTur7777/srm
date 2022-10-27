@@ -32,7 +32,7 @@ const Sidebar = () => {
           />
         )}
         <div className={cl.sidebar__menu}>
-          <h2 className={cl.sidebar__menu__title}>MY STORE</h2>
+          <h2 className={cl.sidebar__menu__title}>DEMO</h2>
           <ul className={cl.sidebar__menu__links}>
             <li>
               <NavLink
@@ -45,7 +45,7 @@ const Sidebar = () => {
               </NavLink>
             </li>
 
-            <li>
+            {/* <li>
               <NavLink
                 exact
                 to="/positions"
@@ -54,7 +54,7 @@ const Sidebar = () => {
               >
                 <span>Должности</span>
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink
                 exact

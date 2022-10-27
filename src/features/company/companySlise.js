@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-export const companyForm = createAsyncThunk(
+export const fetchCompany = createAsyncThunk(
     'company',
     async ({ id, company_name, inn, legal_address, actual_address, telephone,
         okpo, register_number, field_activity },
@@ -15,7 +15,7 @@ export const companyForm = createAsyncThunk(
             }
 
             const { data } = await axios.post(
-                `https://baitushumdemo.herokuapp.com/auth/jwt/create/`,
+                `https://baitushumdemo.herokuapp.com/crm/api/company/`,
                 {
                     id, company_name, inn, legal_address, actual_address, telephone,
                     okpo, register_number, field_activity
@@ -33,32 +33,68 @@ export const companyForm = createAsyncThunk(
     }
 )
 
+export const fetchActivity = createAsyncThunk(
+    'activity',
+    async ({ id, activites_add }, { rejectWithValue }) => {
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+
+            await axios.post(
+                `https://baitushumdemo.herokuapp.com/crm/api/activity`,
+                { id, activites_add },
+                config
+            )
+        } catch (error) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message)
+            } else {
+                return rejectWithValue(error.message)
+            }
+        }
+    }
+)
 const initialState = {
     loading: false,
     error: null,
+    success: false,
 }
 
-const userSlice = createSlice({
+const companiesSlise = createSlice({
     name: 'company',
     initialState,
     reducers: {},
     extraReducers: {
-        [companyForm.pending]: (state) => {
+        [fetchCompany.pending]: (state) => {
             state.loading = true
             state.error = null
         },
-        [companyForm.fulfilled]: (state, { payload }) => {
+        [fetchCompany.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.userInfo = payload
             state.userToken = payload.userToken
         },
-        [companyForm.rejected]: (state, { payload }) => {
+        [fetchCompany.rejected]: (state, { payload }) => {
+            state.loading = false
+            state.error = payload
+        },
+        [fetchActivity.pending]: (state) => {
+            state.loading = true
+            state.error = null
+        },
+        [fetchActivity.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.userInfo = payload
+            state.userToken = payload.userToken
+        },
+        [fetchActivity.rejected]: (state, { payload }) => {
             state.loading = false
             state.error = payload
         },
     },
 })
 
-export const { logout } = userSlice.actions
-
-export default companyForm.reducer
+export default companiesSlise.reducer

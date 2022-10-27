@@ -4,11 +4,6 @@ import cl from "./Navbar.module.scss";
 import { MdOutlineMenu } from "react-icons/md";
 import { useLocation } from "react-router";
 
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { getUserDetails } from "../../features/user/userActions";
-import { logout } from "../../features/user/userSlice";
-
 const Navbar = () => {
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarContext);
   const location = useLocation();

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { useContext } from "react";
-import { SidebarContext } from "../../context";
+
 export const userLogin = createAsyncThunk(
   "login",
   async ({ email, password }, { rejectWithValue }) => {
@@ -17,7 +16,7 @@ export const userLogin = createAsyncThunk(
         { email, password },
         config
       );
-      localStorage.setItem("userToken", data.userToken);
+      localStorage.setItem("userToken", JSON.stringify(data));
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
