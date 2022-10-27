@@ -38,9 +38,8 @@ const Navbar = () => {
           className={cl.navbar__burger}
           onClick={() => setSidebarOpen(!sidebarOpen)}
         />
-        <span>Dashboard</span>
       </h2>
-      <h2 className={cl.navbar__right}>Dashboard / {list}</h2>
+      <h2 className={cl.navbar__right}>{list}</h2>
       <span>
         <h2 className={cl.navbar__role}>User</h2>
       </span>

@@ -7,12 +7,12 @@ import { useSelector } from "react-redux";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { userInfo } = useSelector((state) => state.user);
+  const { isAuth } = useSelector((state) => state.user);
   return (
     <>
       <BrowserRouter>
         <SidebarContext.Provider value={{ sidebarOpen, setSidebarOpen }}>
-          {localStorage.getItem("userToken")!=undefined ? <PrivateRoutes /> : <PublicRoutes />}
+          {localStorage.getItem("userToken") ? <PrivateRoutes /> : <PublicRoutes />}
         </SidebarContext.Provider>
       </BrowserRouter>
     </>

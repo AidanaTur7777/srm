@@ -13,7 +13,6 @@ import { SidebarContext } from "../../context";
 const Login = () => {
   const { loading, userInfo, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const { userIsAuth,setUserIsAuth }=useContext(SidebarContext);
   const { register, handleSubmit } = useForm();
   const navigate=useNavigate();
   const submitForm = (data) => {
