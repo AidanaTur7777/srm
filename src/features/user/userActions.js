@@ -10,13 +10,13 @@ export const userLogin = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-
       const { data } = await axios.post(
         `https://baitushumdemo.herokuapp.com/auth/jwt/create/`,
         { email, password },
         config
       );
       localStorage.setItem("userToken", JSON.stringify(data));
+      console.log(data);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -27,6 +27,7 @@ export const userLogin = createAsyncThunk(
     }
   }
 );
+
 
 export const registerUser = createAsyncThunk(
   "users",
@@ -123,3 +124,28 @@ export const getUserDetails = createAsyncThunk(
     }
   }
 );
+
+export const getUserDetail = createAsyncThunk(
+  "user/getUserDetail",
+  async (arg, { getState, rejectWithValue }) => {
+    try {
+      const { user } = getState();
+      const config = {
+        headers: {
+          Authorization: `Bearer${user.userToken}`,
+        },
+      };
+
+      const { data } = await axios.get(`https://baitushumdemo.herokuapp.com/crm/api/client/`, config);
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+

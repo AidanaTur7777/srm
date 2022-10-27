@@ -3,6 +3,12 @@
   .documents__category {
     margin-top: 50px;
     position: relative;
+    .add__svg {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
     .documents__title {
       font-weight: 400;
       font-size: 24px;
@@ -15,6 +21,19 @@
       margin-top: 30px;
       padding: 4px 10px;
     }
+    .documents__select__container {
+      margin-top: 30px;
+      .documents__select {
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        width: 227px;
+        cursor: pointer;
+        span {
+          cursor: pointer;
+        }
+      }
+    }
+
     .documents__input {
       width: 482px;
       height: 60px;
@@ -29,7 +48,6 @@
       @media (max-width: 555px) {
         width: 95%;
       }
-      
     }
   }
 }
