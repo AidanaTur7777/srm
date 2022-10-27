@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import $api from '../../app/utils/axios'
 
-export const fetchCompany = createAsyncThunk(
-    'company',
-    async ({ id, company_name, inn, legal_address, actual_address, telephone,
-        okpo, register_number, field_activity },
-        { rejectWithValue }) => {
+
+export const fetchActivites = createAsyncThunk(
+    'activites',
+    async ({ activites_add }, { rejectWithValue }) => {
         try {
             const config = {
                 headers: {
@@ -15,11 +15,8 @@ export const fetchCompany = createAsyncThunk(
             }
 
             const { data } = await axios.post(
-                `https://baitushumdemo.herokuapp.com/crm/api/company/`,
-                {
-                    id, company_name, inn, legal_address, actual_address, telephone,
-                    okpo, register_number, field_activity
-                },
+                `https://baitushumdemo.herokuapp.com/crm/api/activity/`,
+                { activites_add },
                 config
             )
             return data
@@ -32,33 +29,40 @@ export const fetchCompany = createAsyncThunk(
         }
     }
 )
+export const fetchProducts = createAsyncThunk(
+    'product/fetchproducts',
+    async () => {
+        const { data } = await $api.get(
+            `/crm/api/activity/`
+        );
+        return data.results;
+    }
+);
 
 const initialState = {
     loading: false,
     error: null,
     success: false,
+    activitesInfo: "",
 }
 
-const companiesSlise = createSlice({
-    name: 'company',
+const activitesSlise = createSlice({
+    name: 'activites',
     initialState,
     reducers: {},
     extraReducers: {
-        [fetchCompany.pending]: (state) => {
+        [fetchActivites.pending]: (state) => {
             state.loading = true
             state.error = null
         },
-        [fetchCompany.fulfilled]: (state, { payload }) => {
+        [fetchActivites.fulfilled]: (state, { payload }) => {
             state.loading = false
-            state.userInfo = payload
-            state.userToken = payload.userToken
+            state.activitesInfo = payload
         },
-        [fetchCompany.rejected]: (state, { payload }) => {
+        [fetchActivites.rejected]: (state, { payload }) => {
             state.loading = false
             state.error = payload
         },
     },
 })
-export const { setRecipientInformation } = companiesSlise.actions;
-
-export default companiesSlise.reducer
+export default activitesSlise.reducer
