@@ -1,8 +1,8 @@
 import cl from "./recipients.module.scss";
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
-import { useDispatch } from "react-redux";
-import { fetchRecipients } from "../../features/recipients/recipients";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRecipients, setRecipientinfo, setRecipientInformation } from "../../features/recipients/recipients";
 import { Input, Select } from "antd";
 
 const Recipients = () => {
@@ -14,6 +14,7 @@ const Recipients = () => {
     dispatch(fetchRecipients(state));
     console.log(state);
   };
+
   const [state, setState] = useState({
     full_name: "",
     status: "",

@@ -51,12 +51,15 @@ const initialState = {
   loading: false,
   error: null,
   success: false,
+  recipientInfo: "",
 };
 
 const recipientsSlise = createSlice({
   name: "recipients",
   initialState,
-  reducers: {},
+  reducers: {
+    
+  },
   extraReducers: {
     [fetchRecipients.pending]: (state) => {
       state.loading = true;
@@ -64,8 +67,7 @@ const recipientsSlise = createSlice({
     },
     [fetchRecipients.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = payload;
-      state.userToken = payload.userToken;
+      state.recipientInfo = payload;
     },
     [fetchRecipients.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -73,5 +75,6 @@ const recipientsSlise = createSlice({
     },
   },
 });
+export const { setRecipientInformation } = recipientsSlise.actions;
 
 export default recipientsSlise.reducer;

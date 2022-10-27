@@ -17,11 +17,15 @@ const Individuals = () => {
     console.log(token);
     dispatch(getUserDetail(token.access));
   }, [dispatch]);
+  const { userInfo } = useSelector((state) => state.counterparties);
+
   const handleSubmit = () => {
     dispatch(fetchCounterparties(state));
     console.log(state);
+    setIdCreditSpec(userInfo.id_credit_spec);
+    console.log(idCreditSpec);
   };
-  const { userToken }=useSelector(state=>state.user)
+  const [idCreditSpec, setIdCreditSpec] = useState("");
   const [state, setState] = useState({
     id_credit_spec: "",
     full_name: "",
@@ -56,6 +60,9 @@ const Individuals = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const { recipientInfo } = useSelector((state) => state.recipients);
+
   return (
     <>
       <h2>Id credit spec:</h2>
@@ -63,6 +70,8 @@ const Individuals = () => {
         className={cl.counterparties__input}
         type="text"
         name="id_credit_spec"
+        value={idCreditSpec}
+        disabled
         onChange={handleInput}
       />
       <h2>ФИО представителя:</h2>
@@ -205,30 +214,36 @@ const Individuals = () => {
       />
       <h2>Поручитель:</h2>
       <div>
-        <Select className={cl.counterparties__accor}>
-          <Select.Option value="demo">Выбрать</Select.Option>
-          <Select.Option value="demo-2">Выбор 2</Select.Option>
-          <Select.Option value="demo-3">Выбор 3</Select.Option>
-        </Select>
+        <input
+          className={cl.counterparties__input}
+          type="text"
+          value={recipientInfo.full_name}
+          name="guarantor"
+          disabled
+        />
         <BsPlusLg className={cl.add__svg} onClick={showModal} />
       </div>
       <h2>Залогове имущество:</h2>
       <div>
-        <Select className={cl.counterparties__accor}>
-          <Select.Option value="demo">Выбрать</Select.Option>
-          <Select.Option value="demo-2">Выбор 2</Select.Option>
-          <Select.Option value="demo-3">Выбор 3</Select.Option>
-        </Select>
+        <input
+          className={cl.counterparties__input}
+          type="text"
+          name="guarantor"
+          disabled
+        />
         <BsPlusLg className={cl.add__svg} />
       </div>
       <h2>Переговоры:</h2>
       <div>
-        <Select className={cl.counterparties__accor}>
-          <Select.Option value="demo">Выбрать</Select.Option>
-          <Select.Option value="demo-2">Выбор 2</Select.Option>
-          <Select.Option value="demo-3">Выбор 3</Select.Option>
-        </Select>
-        <BsPlusLg className={cl.add__svg} />
+        <div>
+          <input
+            className={cl.counterparties__input}
+            type="text"
+            name="guarantor"
+            disabled
+          />
+          <BsPlusLg className={cl.add__svg} />
+        </div>
       </div>
       <Button onClick={handleSubmit}>Submit</Button>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
