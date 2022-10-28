@@ -2,38 +2,32 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchCounterparties = createAsyncThunk(
+export const fetchEntities = createAsyncThunk(
   "counterparties",
   async (
     {
       id_credit_spec,
-      full_name,
+      client_company,
+      full_name_director,
+      inn,
       credit_type,
       status,
       credit_sum,
-      marital_status,
-      credit_history,
       phone,
       address,
       client_actual_address,
-      guarantor,
-      income_statement,
       mortgaged_property,
-      contracts,
-      report,
-      monitoring_report,
-      id_guarantor,
+      average_salary,
+      own_contribution,
+      assets,
+      current_loan,
+      id_company,
       id_property,
-      meet_conversation,
+      id_num_parley,
     },
     { rejectWithValue }
   ) => {
     try {
-      // const config = {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // };
       const token = JSON.parse(localStorage.getItem("userToken"));
       console.log(token.access);
       const config = {
@@ -43,27 +37,26 @@ export const fetchCounterparties = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/crm/api/client/`,
+        `https://baitushumdemo.herokuapp.com/crm/api/entity/`,
         {
           id_credit_spec,
-          full_name,
+          client_company,
+          full_name_director,
+          inn,
           credit_type,
           status,
           credit_sum,
-          marital_status,
-          credit_history,
           phone,
           address,
           client_actual_address,
-          guarantor,
-          income_statement,
           mortgaged_property,
-          contracts,
-          report,
-          monitoring_report,
-          id_guarantor,
+          average_salary,
+          own_contribution,
+          assets,
+          current_loan,
+          id_company,
           id_property,
-          meet_conversation,
+          id_num_parley,
         },
         config
       );
@@ -82,27 +75,27 @@ const initialState = {
   loading: false,
   error: null,
   success: false,
-  userInfo: null,
+  entityUserInfo: null,
 };
 
-const counterpartiesSlise = createSlice({
-  name: "counterparties",
+const entitySlise = createSlice({
+  name: "entity",
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchCounterparties.pending]: (state) => {
+    [fetchEntities.pending]: (state) => {
       state.loading = true;
       state.error = null;
     },
-    [fetchCounterparties.fulfilled]: (state, { payload }) => {
+    [fetchEntities.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = payload;
+      state.entityUserInfo = payload;
     },
-    [fetchCounterparties.rejected]: (state, { payload }) => {
+    [fetchEntities.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },
   },
 });
 
-export default counterpartiesSlise.reducer;
+export default entitySlise.reducer;

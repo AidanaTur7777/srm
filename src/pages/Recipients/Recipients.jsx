@@ -2,7 +2,11 @@ import cl from "./recipients.module.scss";
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRecipients, setRecipientinfo, setRecipientInformation } from "../../features/recipients/recipients";
+import {
+  fetchRecipients,
+  setRecipientinfo,
+  setRecipientInformation,
+} from "../../features/recipients/recipients";
 import { Input, Select } from "antd";
 
 const Recipients = () => {
@@ -18,11 +22,11 @@ const Recipients = () => {
   const [state, setState] = useState({
     full_name: "",
     status: "",
-    credit_history: new FormData(),
+    credit_history: null,
     phone: "",
     address: "",
     actual_address: "",
-    income_statement: new FormData(),
+    income_statement: null,
   });
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -51,15 +55,12 @@ const Recipients = () => {
           <h2>Credit history</h2>
           <input
             type="file"
-            onChange={(e) =>
+            onChange={(e) => {
               setState({
                 ...state,
-                credit_history: state.credit_history.append(
-                  "file",
-                  e.target.value
-                ),
-              })
-            }
+                credit_history: e.target.value,
+              });
+            }}
           />
           <h2>Номер телефона:</h2>
           <input

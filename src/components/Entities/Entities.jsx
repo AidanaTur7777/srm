@@ -7,33 +7,56 @@ import { fetchCounterparties } from "../../features/counterparties/counterpartie
 import { Modal } from "antd";
 import Recipients from "../../pages/Recipients/Recipients";
 import { BsPlusLg } from "react-icons/bs";
+import { fetchEntities } from "../../features/entity/entitySlice";
+import { getUserDetail } from "../../features/user/userActions";
+import MortgagedProperty from "../../pages/MortgagedProperty/MortgagedProperty";
+import ConversationsContent from "../../pages/Conversations/ConversationsContent";
+import MortgagedPropertyContent from "../../pages/MortgagedProperty/MortgagedPropertyContent";
+import CompaniesContent from "../../pages/Companies/CompaniesContent";
+import Activites from "../Actives/Actives";
 
 const Entities = () => {
   const dispatch = useDispatch();
+
+  const { propertyInfo } = useSelector((state) => state.property);
+  const { conversationInfo } = useSelector((state) => state.conversations);
+  const [property, setProperty] = useState(propertyInfo ? propertyInfo.id : "");
+  const [conversation, setConversation] = useState(
+    conversationInfo ? conversationInfo.id : ""
+  );
   useEffect(() => {
-    dispatch(fetchCounterparties());
+    setProperty(propertyInfo && propertyInfo.id);
+    setConversation(conversationInfo && conversationInfo.id);
+  }, [propertyInfo, conversationInfo]);
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("userToken"));
+    dispatch(getUserDetail(token.access));
   }, [dispatch]);
   const handleSubmit = () => {
-    dispatch(fetchCounterparties(state));
+    dispatch(fetchEntities(state));
     console.log(state);
   };
+  const { activitesInfo } = useSelector((state) => state.activites);
+  const { companiesInfo }=useSelector(state=>state.companies)
   const [state, setState] = useState({
     id_credit_spec: "",
-    full_name: "",
+    client_company: "",
+    full_name_director: "",
+    inn: "",
     credit_type: "",
     status: "",
     credit_sum: "",
-    marital_status: "",
-    credit_history: new FormData(),
     phone: "",
     address: "",
     client_actual_address: "",
-    guarantor: "",
-    income_statement: new FormData(),
     mortgaged_property: "",
-    contracts: new FormData(),
-    report: new FormData(),
-    monitoring_report: new FormData(),
+    average_salary: "",
+    own_contribution: "",
+    assets: "",
+    current_loan: "",
+    id_company: "",
+    id_property: "",
+    id_num_parley: "",
   });
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -51,36 +74,68 @@ const Entities = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const [isModalOpenTwo, setIsModalOpenTwo] = useState(false);
+  const showModalTwo = () => {
+    setIsModalOpenTwo(true);
+  };
+  const handleOkTwo = () => {
+    setIsModalOpenTwo(false);
+  };
+  const handleCancelTwo = () => {
+    setIsModalOpenTwo(false);
+  };
+
+  const [isModalOpenThree, setIsModalOpenThree] = useState(false);
+  const showModalThree = () => {
+    setIsModalOpenThree(true);
+  };
+  const handleOkThree = () => {
+    setIsModalOpenThree(false);
+  };
+  const handleCancelThree = () => {
+    setIsModalOpenThree(false);
+  };
+  const [isModalOpenFour, setIsModalOpenFour] = useState(false);
+  const showModalFour = () => {
+    setIsModalOpenFour(true);
+  };
+  const handleOkFour = () => {
+    setIsModalOpenFour(false);
+  };
+  const handleCancelFour = () => {
+    setIsModalOpenFour(false);
+  };
+  const [isModalOpenFive, setIsModalOpenFive] = useState(false);
+  const showModalFive = () => {
+    setIsModalOpenFive(true);
+  };
+  const handleOkFive = () => {
+    setIsModalOpenFive(false);
+  };
+  const handleCancelFive = () => {
+    setIsModalOpenFive(false);
+  };
   return (
-    <>
-      <h2>Id credit spec:</h2>
-      <input
-        className={cl.counterparties__input}
-        type="text"
-        name="id_credit_spec"
-        onChange={handleInput}
-      />
+    <div className={cl.counterparties__content}>
       <h2>ФИО представителя:</h2>
       <input
         className={cl.counterparties__input}
         type="text"
-        name="full_name"
+        name="full_name_director"
         onChange={handleInput}
       />
-      <h2>id company:</h2>
-      <div>
-        <Select className={cl.counterparties__accor}>
-          <Select.Option value="demo">Выбрать</Select.Option>
-          <Select.Option value="demo-2">Выбор 2</Select.Option>
-          <Select.Option value="demo-3">Выбор 3</Select.Option>
-        </Select>
-        <BsPlusLg className={cl.add__svg} />
-      </div>
+      <h2>Компания клиента:</h2>
+      <input
+        className={cl.counterparties__input}
+        type="text"
+        name="client_company"
+        onChange={handleInput}
+      />
       <h2>ИНН:</h2>
       <input
         className={cl.counterparties__input}
         type="text"
-        name="full_name"
+        name="inn"
         onChange={handleInput}
       />
       <h2>Тип кредита:</h2>
@@ -112,16 +167,6 @@ const Entities = () => {
           onChange={handleInput}
         />
       </p>
-      <h2>Кредитная история:</h2>
-      <input
-        type="file"
-        onChange={(e) =>
-          setState({
-            ...state,
-            credit_history: state.credit_history.append("file", e.target.value),
-          })
-        }
-      />
       <h2>Телефон компании:</h2>
       <input
         className={cl.counterparties__input}
@@ -134,7 +179,7 @@ const Entities = () => {
         className={cl.counterparties__input}
         type="text"
         onChange={handleInput}
-        name="phone"
+        name="address"
       />
       <h2>Адрес фактический</h2>
       <input
@@ -149,111 +194,122 @@ const Entities = () => {
         className={cl.counterparties__input}
         type="text"
         onChange={handleInput}
-        name="guarantor"
+        name="mortgaged_property"
       />
-      <h2>Договора с подрядчиками и поставщиками:</h2>
-      <input
-        type="file"
-        onChange={(e) =>
-          setState({
-            ...state,
-            contracts: state.contracts.append("file", e.target.value),
-          })
-        }
-      />
-      <h2>Отчёт подрядчиков и поставщиков об оказанной услуге:</h2>
-      <input
-        type="file"
-        onChange={(e) =>
-          setState({
-            ...state,
-            report: state.report.append("file", e.target.value),
-          })
-        }
-      />
-      <h2>Отчёт по мониторингу:</h2>
-      <input
-        type="file"
-        onChange={(e) =>
-          setState({
-            ...state,
-            monitoring_report: state.monitoring_report.append(
-              "file",
-              e.target.value
-            ),
-          })
-        }
-      />
-      <h2>Источник дохода:</h2>
-      <div>
-        <Select className={cl.counterparties__accor}>
-          <Select.Option value="demo">Выбрать</Select.Option>
-          <Select.Option value="demo-2">Выбор 2</Select.Option>
-          <Select.Option value="demo-3">Выбор 3</Select.Option>
-        </Select>
-        <BsPlusLg className={cl.add__svg} />
-      </div>
+
       <h2>Средний доход в месяц:</h2>
       <input
         className={cl.counterparties__input}
         type="text"
         onChange={handleInput}
-        name="guarantor"
+        name="average_salary"
       />
       <h2>Размер собственного вклада:</h2>
       <input
         className={cl.counterparties__input}
         type="text"
         onChange={handleInput}
-        name="guarantor"
+        name="own_contribution"
       />
       <h2>Активы на момент анализа:</h2>
       <input
         className={cl.counterparties__input}
         type="text"
         onChange={handleInput}
-        name="guarantor"
+        name="assets"
       />
       <h2>Текущие кредиты:</h2>
       <input
         className={cl.counterparties__input}
         type="text"
         onChange={handleInput}
-        name="guarantor"
+        name="current_loan"
       />
-      <h2>Кредитный специалист:</h2>
-      <Select
-        className={cl.counterparties__accor}
-        onChange={(e) => setState({ ...state, status: e })}
-      >
-        <Select.Option value="success">Принят</Select.Option>
-        <Select.Option value="processing">Обработка</Select.Option>
-        <Select.Option value="discussion">На рассмотрении</Select.Option>
-        <Select.Option value="denied">Отказано</Select.Option>
-      </Select>
-      <h2>Залоговое имущество:</h2>
+      <h2>Id company:</h2>
       <div>
-        <Select className={cl.counterparties__accor}>
-          <Select.Option value="demo">Выбрать</Select.Option>
-          <Select.Option value="demo-2">Выбор 2</Select.Option>
-          <Select.Option value="demo-3">Выбор 3</Select.Option>
-        </Select>
-        <BsPlusLg className={cl.add__svg} />
+        <input
+          className={cl.counterparties__input}
+          type="text"
+          value={companiesInfo && companiesInfo.company_name}
+          disabled
+        />
+        <BsPlusLg className={cl.add__svg} onClick={showModalFour} />
+      </div>
+      <h2>Источник дохода:</h2>
+      <div>
+        <input
+          className={cl.counterparties__input}
+          type="text"
+          name="souce_of_income"
+          value={activitesInfo ? activitesInfo.activites_add : ""}
+
+          disabled
+        />
+        <BsPlusLg className={cl.add__svg} onClick={showModalFive} />
+      </div>
+      <h2>Залогове имущество:</h2>
+      <div>
+        <input
+          className={cl.counterparties__input}
+          type="text"
+          value={propertyInfo && propertyInfo.type}
+          disabled
+        />
+        <BsPlusLg className={cl.add__svg} onClick={showModalTwo} />
       </div>
       <h2>Переговоры:</h2>
       <div>
-        <Select className={cl.counterparties__accor}>
-          <Select.Option value="demo">Выбрать</Select.Option>
-          <Select.Option value="demo-2">Выбор 2</Select.Option>
-          <Select.Option value="demo-3">Выбор 3</Select.Option>
-        </Select>
-        <BsPlusLg className={cl.add__svg} />
+        <div>
+          <input
+            className={cl.counterparties__input}
+            type="text"
+            value={conversationInfo && conversationInfo.name}
+            disabled
+          />
+          <BsPlusLg className={cl.add__svg} onClick={showModalThree} />
+        </div>
       </div>
       <Button onClick={handleSubmit}>Submit</Button>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <Recipients />
+        <div>
+          <h2>Источник дохода:</h2>
+          <input
+            className={cl.counterparties__input}
+            type="text"
+            onChange={handleInput}
+            name="souce_of_income"
+          />
+        </div>
       </Modal>
-    </>
+      <Modal
+        open={isModalOpenTwo}
+        onOk={handleOkTwo}
+        onCancel={handleCancelTwo}
+      >
+        <MortgagedPropertyContent />
+      </Modal>
+      <Modal
+        open={isModalOpenThree}
+        onOk={handleOkThree}
+        onCancel={handleCancelThree}
+      >
+        <ConversationsContent />
+      </Modal>
+      <Modal
+        open={isModalOpenFour}
+        onOk={handleOkFour}
+        onCancel={handleCancelFour}
+      >
+        <CompaniesContent/>
+      </Modal>
+      <Modal
+        open={isModalOpenFive}
+        onOk={handleOkFive}
+        onCancel={handleCancelFive}
+      >
+        <Activites/>
+      </Modal>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 export const fetchCompany = createAsyncThunk(
     'company',
     async ({ id, company_name, inn, legal_address, actual_address, telephone,
-        okpo, register_number, field_activity },
+        okpo, register_number },
         { rejectWithValue }) => {
         try {
             const config = {
@@ -18,7 +18,7 @@ export const fetchCompany = createAsyncThunk(
                 `https://baitushumdemo.herokuapp.com/crm/api/company/`,
                 {
                     id, company_name, inn, legal_address, actual_address, telephone,
-                    okpo, register_number, field_activity
+                    okpo, register_number
                 },
                 config
             )
@@ -37,6 +37,7 @@ const initialState = {
     loading: false,
     error: null,
     success: false,
+    companiesInfo:null,
 }
 
 const companiesSlise = createSlice({
@@ -51,7 +52,7 @@ const companiesSlise = createSlice({
         [fetchCompany.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.userInfo = payload
-            state.userToken = payload.userToken
+            state.companiesInfo = payload
         },
         [fetchCompany.rejected]: (state, { payload }) => {
             state.loading = false

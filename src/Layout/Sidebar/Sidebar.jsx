@@ -47,16 +47,6 @@ const Sidebar = () => {
             <li>
               <NavLink
                 exact
-                to="/mortgaged-property"
-                className={({ isActive }) => (isActive ? cl.active : "")}
-                onClick={() => clickHandler()}
-              >
-                <span>Залоговое имущество</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                exact
                 to="/companies"
                 className={({ isActive }) => (isActive ? cl.active : "")}
                 onClick={() => clickHandler()}

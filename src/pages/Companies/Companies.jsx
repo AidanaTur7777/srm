@@ -1,112 +1,16 @@
-import React , { useEffect, useState } from "react";
-import Button from "../../components/Button/Button";
-import cl from "./companies.module.scss";
-import Layout from "../../Layout/Layout";
-import { useDispatch } from "react-redux";
-import { fetchCompany } from "../../features/company/companySlise";
-import { useForm } from "react-hook-form";
+import React from 'react'
+import Layout from '../../Layout/Layout'
+import CompaniesContent from './CompaniesContent'
 
 const Companies = () => {
-  const { register, handleSubmit } = useForm();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCompany())
-  }, [dispatch])
-  const submitForm = (data) => {
-    console.log(data);
-  };
-  const [state, setState] = useState({
-		name: '',
-		author: '',
-	});
-	const handle = (e) => {
-		setState({ ...state, [e.target.name]: e.target.value });
-	};
   return (
     <Layout>
-      <div className={cl.companies}>
-        <form onCubmit={handleSubmit(submitForm)}>
-          <div className={cl.companies__category}>
-            <h2 className={cl.companies__title}>Наименование компании</h2>
-            <input
-              className={cl.companies__input}
-              type="text"
-              {...register("company_name")}
-              required
-            />
-          </div>
-          <div className={cl.companies__category}>
-            <h2 className={cl.companies__title}>Юридический адрес</h2>
-            <input
-              className={cl.companies__input}
-              type="text"
-              {...register("legal_address")}
-              required
-            />
-          </div>
-          <div className={cl.companies__category}>
-            <h2 className={cl.companies__title}>Фактический адрес</h2>
-            <input
-              className={cl.companies__input}
-              type="text"
-              {...register("actual_address")}
-              required
-            />
-          </div>
-          <div className={cl.companies__category}>
-            <h2 className={cl.companies__title}>Номер телефона</h2>
-            <input
-              className={cl.companies__input}
-              type="text"
-              {...register("telephone")}
-              required
-            />
-          </div>
-          <div className={cl.companies__category}>
-            <h2 className={cl.companies__title}>Сфера деятельности</h2>
-            <input
-              className={cl.companies__input}
-              type="text"
-              {...register("field_activity")}
-              required
-            />
-          </div>
-          <div className={cl.companies__category}>
-            <h2 className={cl.companies__title}>Okpo</h2>
-            <input
-              className={cl.companies__input}
-              type="text"
-              {...register("okpo")}
-              required
-            />
-          </div>
-          <div className={cl.companies__category}>
-            <h2 className={cl.companies__title}>inn</h2>
-            <input
-              className={cl.companies__input}
-              type="text"
-              {...register("inn")}
-              required
-            />
-          </div>
-          <div className={cl.companies__category}>
-            <h2 className={cl.companies__title}>Register number</h2>
-            <input
-              className={cl.companies__input}
-              type="text"
-              {...register("register_number")}
-              required
-            />
-          </div>
-          <Button>Submit</Button>
-          
-        </form>
-      </div>
+      <CompaniesContent/>
     </Layout>
-  );
-};
+  )
+}
 
-export default Companies;
+export default Companies
 
 
 // import React, { useEffect } from 'react'

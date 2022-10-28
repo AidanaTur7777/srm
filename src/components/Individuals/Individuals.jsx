@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "../../components/Button/Button";
-import { Input, Select } from "antd";
+import { Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import cl from "../../pages/Counterparties/counterparties.module.scss";
 import { fetchCounterparties } from "../../features/counterparties/counterpartiesSlice";
@@ -8,24 +8,23 @@ import { Modal } from "antd";
 import Recipients from "../../pages/Recipients/Recipients";
 import { BsPlusLg } from "react-icons/bs";
 import { getUserDetail } from "../../features/user/userActions";
+import MortgagedPropertyContent from "../../pages/MortgagedProperty/MortgagedPropertyContent";
+import ConversationsContent from "../../pages/Conversations/ConversationsContent";
 
 const Individuals = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchCounterparties());
-    const token = JSON.parse(localStorage.getItem("userToken"));
-    console.log(token);
-    dispatch(getUserDetail(token.access));
-  }, [dispatch]);
-  const { userInfo } = useSelector((state) => state.counterparties);
-
-  const handleSubmit = () => {
-    dispatch(fetchCounterparties(state));
-    console.log(state);
-    setIdCreditSpec(userInfo.id_credit_spec);
-    console.log(idCreditSpec);
-  };
   const [idCreditSpec, setIdCreditSpec] = useState("");
+  const { userInfo } = useSelector((state) => state.counterparties);
+  const { recipientInfo } = useSelector((state) => state.recipients);
+  const { propertyInfo } = useSelector((state) => state.property);
+  const { conversationInfo } = useSelector((state) => state.conversations);
+  const [guarantor, setGuarantor] = useState(
+    recipientInfo ? recipientInfo.id : ""
+  );
+  const [property, setProperty] = useState(propertyInfo ? propertyInfo.id : "");
+  const [conversation, setConversation] = useState(
+    conversationInfo ? conversationInfo.id : ""
+  );
   const [state, setState] = useState({
     id_credit_spec: "",
     full_name: "",
@@ -33,47 +32,81 @@ const Individuals = () => {
     status: "",
     credit_sum: "",
     marital_status: "",
-    credit_history: new FormData(),
+    credit_history: null,
     phone: "",
     address: "",
     client_actual_address: "",
     guarantor: "",
-    income_statement: new FormData(),
+    income_statement: null,
     mortgaged_property: "",
-    contracts: new FormData(),
-    report: new FormData(),
-    monitoring_report: new FormData(),
+    contracts: null,
+    report: null,
+    monitoring_report: null,
+    id_guarantor: guarantor,
+    id_property: property,
+    meet_conversation: conversation,
   });
+  useEffect(() => {
+    setGuarantor(recipientInfo && recipientInfo.id);
+    setProperty(propertyInfo && propertyInfo.id);
+    setConversation(conversationInfo && conversationInfo.id);
+  }, [recipientInfo, propertyInfo, conversationInfo]);
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("userToken"));
+    dispatch(getUserDetail(token.access));
+  }, [dispatch]);
+  const handleSubmit = () => {
+    dispatch(fetchCounterparties(state));
+    console.log(state);
+    setIdCreditSpec(userInfo && userInfo.id_credit_spec);
+    console.log(idCreditSpec);
+  };
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const showModal = () => {
     setIsModalOpen(true);
   };
-
   const handleOk = () => {
     setIsModalOpen(false);
   };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  const { recipientInfo } = useSelector((state) => state.recipients);
+  const [isModalOpenTwo, setIsModalOpenTwo] = useState(false);
+  const showModalTwo = () => {
+    setIsModalOpenTwo(true);
+  };
+  const handleOkTwo = () => {
+    setIsModalOpenTwo(false);
+  };
+  const handleCancelTwo = () => {
+    setIsModalOpenTwo(false);
+  };
 
+  const [isModalOpenThree, setIsModalOpenThree] = useState(false);
+  const showModalThree = () => {
+    setIsModalOpenThree(true);
+  };
+  const handleOkThree = () => {
+    setIsModalOpenThree(false);
+  };
+  const handleCancelThree = () => {
+    setIsModalOpenThree(false);
+  };
   return (
-    <>
-      <h2>Id credit spec:</h2>
+    <div className={cl.counterparties__content}>
+      {/* <h2>Id credit spec:</h2>
       <input
         className={cl.counterparties__input}
         type="text"
         name="id_credit_spec"
-        value={idCreditSpec}
+        value={idCreditSpec && idCreditSpec}
         disabled
         onChange={handleInput}
-      />
+      /> */}
       <h2>ФИО представителя:</h2>
       <input
         className={cl.counterparties__input}
@@ -126,7 +159,7 @@ const Individuals = () => {
         onChange={(e) =>
           setState({
             ...state,
-            credit_history: state.credit_history.append("file", e.target.value),
+            credit_history: state.credit_history=(new FormData()).append("file", e.target.value),
           })
         }
       />
@@ -165,7 +198,7 @@ const Individuals = () => {
         onChange={(e) =>
           setState({
             ...state,
-            income_statement: state.income_statement.append(
+            income_statement: state.income_statement=(new FormData()).append(
               "file",
               e.target.value
             ),
@@ -185,7 +218,7 @@ const Individuals = () => {
         onChange={(e) =>
           setState({
             ...state,
-            contracts: state.contracts.append("file", e.target.value),
+            contracts: state.contracts=(new FormData()).append("file", e.target.value),
           })
         }
       />
@@ -195,7 +228,7 @@ const Individuals = () => {
         onChange={(e) =>
           setState({
             ...state,
-            report: state.report.append("file", e.target.value),
+            report: state.report=(new FormData()).append("file", e.target.value),
           })
         }
       />
@@ -205,7 +238,7 @@ const Individuals = () => {
         onChange={(e) =>
           setState({
             ...state,
-            monitoring_report: state.monitoring_report.append(
+            monitoring_report: state.monitoring_report=(new FormData()).append(
               "file",
               e.target.value
             ),
@@ -217,7 +250,7 @@ const Individuals = () => {
         <input
           className={cl.counterparties__input}
           type="text"
-          value={recipientInfo.full_name}
+          value={recipientInfo ? recipientInfo.full_name : ""}
           name="guarantor"
           disabled
         />
@@ -229,9 +262,10 @@ const Individuals = () => {
           className={cl.counterparties__input}
           type="text"
           name="guarantor"
+          value={propertyInfo && propertyInfo.type}
           disabled
         />
-        <BsPlusLg className={cl.add__svg} />
+        <BsPlusLg className={cl.add__svg} onClick={showModalTwo} />
       </div>
       <h2>Переговоры:</h2>
       <div>
@@ -240,16 +274,31 @@ const Individuals = () => {
             className={cl.counterparties__input}
             type="text"
             name="guarantor"
+            value={conversationInfo && conversationInfo.name}
             disabled
           />
-          <BsPlusLg className={cl.add__svg} />
+          <BsPlusLg className={cl.add__svg} onClick={showModalThree} />
         </div>
       </div>
       <Button onClick={handleSubmit}>Submit</Button>
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <Recipients />
       </Modal>
-    </>
+      <Modal
+        open={isModalOpenTwo}
+        onOk={handleOkTwo}
+        onCancel={handleCancelTwo}
+      >
+        <MortgagedPropertyContent />
+      </Modal>
+      <Modal
+        open={isModalOpenThree}
+        onOk={handleOkThree}
+        onCancel={handleCancelThree}
+      >
+        <ConversationsContent />
+      </Modal>
+    </div>
   );
 };
 
