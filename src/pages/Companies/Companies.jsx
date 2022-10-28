@@ -5,22 +5,26 @@ import Layout from '../../Layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCompany } from '../../features/company/companySlise'
 import { BsPlusLg } from 'react-icons/bs'
-import { Modal } from 'antd'
-import { fetchActivites } from '../../features/company/activitySlise'
+import { Modal, Select } from 'antd'
+import {
+  fetchActivites,
+  fetchActivitesGet,
+} from '../../features/company/activitySlise'
 import Activites from './Activites'
+import ActivitesItem from './ActivitesItem'
 
-const Companies = () => {
+const Companies = (data) => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchCompany())
     dispatch(fetchActivites())
+    dispatch(fetchActivitesGet())
   }, [dispatch])
   const handleSubmit = () => {
     dispatch(fetchCompany(state))
     console.log(state)
   }
   const { activitesInfo } = useSelector((state) => state.activites)
-
   const [activites, setActivites] = useState(
     activitesInfo ? activitesInfo.id : ''
   )
@@ -33,7 +37,7 @@ const Companies = () => {
     telephone: '',
     okpo: '',
     register_number: '',
-    field_activity: activites,
+    field_activity: activitesInfo.id,
   })
 
   useEffect(() => {
@@ -56,6 +60,7 @@ const Companies = () => {
   const handleCancel = () => {
     setIsModalOpen(false)
   }
+  const { activitesGet } = useSelector((state) => state.activites)
   return (
     <Layout>
       <div className={cl.companies}>
@@ -97,14 +102,20 @@ const Companies = () => {
         </div>
         <div className={cl.companies__category}>
           <h2 className={cl.companies__title}>Сфера деятельности</h2>
-          <input
-            className={cl.companies__input}
+          <Select
             type="text"
             name="field_activity"
-            onChange={handleInput}
+            className={cl.counterparties__accor}
+            onChange={(e) => setState({ ...state, status: e })}
             value={activitesInfo && activitesInfo.activites_add}
-            disabled
-          />
+          >
+            {activitesGet &&
+              activitesGet.map((item) => (
+                <Select.Option name="field_activity" key={item.id}>
+                  <ActivitesItem data={item}/>
+                </Select.Option>
+              ))}
+          </Select>
           <BsPlusLg className={cl.add__svg} onClick={showModal} />
         </div>
         <div className={cl.companies__category}>

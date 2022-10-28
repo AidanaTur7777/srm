@@ -53,7 +53,7 @@ const Sidebar = () => {
               >
                 <span>Залоговое имущество</span>
               </NavLink>
-            </li> */}
+            </li>
             <li>
               <NavLink
                 exact

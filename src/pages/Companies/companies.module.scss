@@ -30,4 +30,21 @@
       }
     }
   }
+  #counterparties__accor {
+    width: 482px;
+    height: 60px;
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .counterparties__accor {
+    width: 482px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    cursor: pointer;
+    span {
+      cursor: pointer;
+    }
+  }
 }
