@@ -102,7 +102,7 @@ const Companies = (data) => {
         </div>
         <div className={cl.companies__category}>
           <h2 className={cl.companies__title}>Сфера деятельности</h2>
-          <Select
+          {/* <Select
             type="text"
             name="field_activity"
             className={cl.counterparties__accor}
@@ -116,7 +116,13 @@ const Companies = (data) => {
                 </Select.Option>
               ))}
           </Select>
-          <BsPlusLg className={cl.add__svg} onClick={showModal} />
+          <BsPlusLg className={cl.add__svg} onClick={showModal} /> */}
+          <input
+            className={cl.companies__input}
+            type="text"
+            onChange={handleInput}
+            name="field_activity"
+          />
         </div>
         <div className={cl.companies__category}>
           <h2 className={cl.companies__title}>Окпо</h2>
