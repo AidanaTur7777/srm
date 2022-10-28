@@ -1,8 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import $api from '../../app/utils/axios'
 
+export const activitesGetAdapter = createEntityAdapter();
+export const activitesGetSelectors = activitesGetAdapter.getSelectors(
+    (state) => state.activitesGet
+);
 
 export const fetchActivites = createAsyncThunk(
     'activites',
@@ -29,13 +33,13 @@ export const fetchActivites = createAsyncThunk(
         }
     }
 )
-export const fetchProducts = createAsyncThunk(
+export const fetchActivitesGet = createAsyncThunk(
     'product/fetchproducts',
     async () => {
         const { data } = await $api.get(
             `/crm/api/activity/`
         );
-        return data.results;
+        return data;
     }
 );
 
@@ -44,6 +48,7 @@ const initialState = {
     error: null,
     success: false,
     activitesInfo: "",
+    activitesGet:null
 }
 
 const activitesSlise = createSlice({
@@ -62,6 +67,20 @@ const activitesSlise = createSlice({
         [fetchActivites.rejected]: (state, { payload }) => {
             state.loading = false
             state.error = payload
+        },
+        [fetchActivitesGet.pending]: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        [fetchActivitesGet.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error;
+
+        },
+        [fetchActivitesGet.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+            state.activitesGet = action.payload;
         },
     },
 })

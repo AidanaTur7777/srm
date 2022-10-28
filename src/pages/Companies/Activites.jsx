@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../../components/Button/Button'
 import cl from './companies.module.scss'
-import { useDispatch } from 'react-redux'
 import { fetchActivites } from '../../features/company/activitySlise'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Activites = () => {
   const dispatch = useDispatch()
@@ -20,6 +20,8 @@ const Activites = () => {
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
+  const { activitesGet } = useSelector((state) => state.activites)
+  console.log(activitesGet)
   return (
     <div className={cl.companies__category}>
       <h2 className={cl.companies__title}>Сфера деятельности</h2>
