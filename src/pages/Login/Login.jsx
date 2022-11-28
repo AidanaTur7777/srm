@@ -7,14 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../features/user/userActions";
 import { useEffect } from "react";
-import Error from "../../components/Error";
+import Error from "../../components/Error/Error";
 import { SidebarContext } from "../../context";
 
 const Login = () => {
   const { loading, userInfo, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const submitForm = (data) => {
     dispatch(userLogin(data));
     navigate("/documents");

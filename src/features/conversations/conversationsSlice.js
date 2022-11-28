@@ -1,48 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
-export const fetchConversations = createAsyncThunk(
-  "conversations",
-  async (
-    { is_meeting, name, date, time, desc, file_results_report, file_statistics },
-    { rejectWithValue }
-  ) => {
-    try {
-        const results_report=new FormData();
-        results_report.append("file",file_results_report)
-        const statistics=new FormData();
-        statistics.append("file",file_statistics)
-
-      const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/crm/api/convers/`,
-        {
-          is_meeting,
-          name,
-          date,
-          time,
-          desc,
-        }
-      );
-      return data;
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
-    }
-  }
-);
+import {
+  deleteConversation,
+  fetchConversations,
+  getConversations,
+} from "./conversationsActions";
 
 const initialState = {
   loading: false,
   error: null,
   success: false,
   conversationInfo: null,
+  getLoading: false,
+  getError: null,
+  getSuccess: false,
+  conversations: null,
+  deleteLoading: false,
+  deleteError: null,
+  deleteSuccess: false,
+  conversationDel: null,
 };
 
-const conversationsSlise = createSlice({
+const conversationsSlice = createSlice({
   name: "properties",
   initialState,
   reducers: {},
@@ -54,12 +32,37 @@ const conversationsSlise = createSlice({
     [fetchConversations.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.conversationInfo = payload;
+      state.success = true;
     },
     [fetchConversations.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },
+    [getConversations.pending]: (state) => {
+      state.getLoading = true;
+      state.getError = null;
+    },
+    [getConversations.fulfilled]: (state, { payload }) => {
+      state.getLoading = false;
+      state.conversations = payload;
+    },
+    [getConversations.rejected]: (state, { payload }) => {
+      state.getLoading = false;
+      state.getError = payload;
+    },
+    [deleteConversation.pending]: (state) => {
+      state.deleteLoading = true;
+      state.deleteError = null;
+    },
+    [deleteConversation.fulfilled]: (state, { payload }) => {
+      state.deleteLoading = false;
+      state.conversationDel = payload;
+    },
+    [deleteConversation.rejected]: (state, { payload }) => {
+      state.deleteLoading = false;
+      state.deleteError = payload;
+    },
   },
 });
 
-export default conversationsSlise.reducer;
+export default conversationsSlice.reducer;

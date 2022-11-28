@@ -12,13 +12,8 @@ const Sidebar = () => {
   const clickHandler = () => {
     setSidebarOpen(false);
   };
-  const { userToken } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (userToken) {
-      dispatch(getUserDetails());
-    }
-  }, [userToken, dispatch]);
+
   return (
     <>
       <div className={`${cl.sidebar} ${sidebarOpen && cl.sidebar__open}`}>
@@ -61,7 +56,7 @@ const Sidebar = () => {
                 className={({ isActive }) => (isActive ? cl.active : "")}
                 onClick={() => clickHandler()}
               >
-                <span>Контрагенты</span>
+                <span>ЧП/ИП</span>
               </NavLink>
             </li>
             <li>

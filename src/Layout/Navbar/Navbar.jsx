@@ -4,27 +4,22 @@ import cl from "./Navbar.module.scss";
 import { MdOutlineMenu } from "react-icons/md";
 import { useLocation } from "react-router";
 
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { getUserDetails } from "../../features/user/userActions";
-import { logout } from "../../features/user/userSlice";
-
 const Navbar = () => {
   const { sidebarOpen, setSidebarOpen } = useContext(SidebarContext);
   const location = useLocation();
   const [list, setList] = useState("Документы на КК");
   useEffect(() => {
-    if (location.pathname === "/documents") {
+    if (location.pathname === "/documents" || location.pathname === "/documents/add") {
       setList("Документы на КК");
-    } else if (location.pathname === "/positions") {
+    } else if (location.pathname === "/positions" || location.pathname === "/documents/add") {
       setList("Должности");
-    } else if (location.pathname === "/companies") {
+    } else if (location.pathname === "/companies" || location.pathname === "/companies/add") {
       setList("Компании");
-    } else if (location.pathname === "/counterparties") {
-      setList("Контрагенты");
-    } else if (location.pathname === "/recipients") {
+    } else if (location.pathname === "/counterparties" || location.pathname === "/counterparties/add") {
+      setList("ЧП/ИП");
+    } else if (location.pathname === "/recipients" || location.pathname === "/recipients/add") {
       setList("Поручители");
-    } else if (location.pathname === "/conversations") {
+    } else if (location.pathname === "/conversations" || location.pathname === "/conversations/add") {
       setList("Тел. переговоры");
     } else {
       setList("Документы на КК");

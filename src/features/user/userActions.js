@@ -27,7 +27,33 @@ export const userLogin = createAsyncThunk(
     }
   }
 );
-
+export const updateToken = createAsyncThunk(
+  "refresh",
+  async ({ rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const refreshToken = JSON.parse(localStorage.getItem("userToken")).refresh;
+      const { data } = await axios.post(
+        `https://baitushumdemo.herokuapp.com/auth/jwt/refresh/`,
+        { refreshToken },
+        config
+      );
+      localStorage.setItem("userToken", JSON.stringify(data));
+      console.log("refreshToken",data);
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 
 export const registerUser = createAsyncThunk(
   "users",
@@ -102,29 +128,6 @@ export const registerClient = createAsyncThunk(
   }
 );
 
-export const getUserDetails = createAsyncThunk(
-  "user/getUserDetails",
-  async (arg, { getState, rejectWithValue }) => {
-    try {
-      const { user } = getState();
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.userToken}`,
-        },
-      };
-
-      const { data } = await axios.get(``, config);
-      return data;
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
-    }
-  }
-);
-
 export const getUserDetail = createAsyncThunk(
   "user/getUserDetail",
   async (arg, { getState, rejectWithValue }) => {
@@ -136,7 +139,10 @@ export const getUserDetail = createAsyncThunk(
         },
       };
 
-      const { data } = await axios.get(`https://baitushumdemo.herokuapp.com/crm/api/client/`, config);
+      const { data } = await axios.get(
+        `https://baitushumdemo.herokuapp.com/crm/api/client/`,
+        config
+      );
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -147,5 +153,3 @@ export const getUserDetail = createAsyncThunk(
     }
   }
 );
-
-

@@ -1,22 +1,27 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import counterpartiesSlice from "../features/counterparties/counterpartiesSlice";
+import counterpartiesSlice from "../features/clients/clientsSlice";
 import userReducer from "../features/user/userSlice";
-import recipients from "../features/recipients/recipients";
 import propertySlice from "../features/property/propertySlice";
 import conversationsSlice from "../features/conversations/conversationsSlice";
 import entitySlice from "../features/entity/entitySlice";
-import activitSlice from "../features/documents/activitSlice";
-import companySlise from "../features/company/companySlise";
+import companySlise from "../features/company/companySlice";
+import guarantorsSlice from "../features/guarantors/guarantorsSlice";
+import creditSpecSlice from "../features/creditSpec/creditSpecSlice";
+import activitySlice from "../features/activity/activitySlice";
+import documentsSlice from "../features/documents/documentsSlice";
+
 const store = configureStore({
   reducer: {
     user: userReducer,
     counterparties: counterpartiesSlice,
-    recipients: recipients,
+    guarantor: guarantorsSlice,
     property: propertySlice,
     conversations: conversationsSlice,
     entity: entitySlice,
-    activites: activitSlice,
-    companies: companySlise
+    activites: activitySlice,
+    companies: companySlise,
+    creditSpec: creditSpecSlice,
+    documents: documentsSlice,
   },
 });
 

@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Error from "../../components/Error";
+import Error from "../../components/Error/Error";
 import { registerUser } from "../../features/user/userActions";
 
 const Registration = () => {
@@ -67,10 +67,10 @@ const Registration = () => {
         <select {...register("occupation")} required>
           {/* <option value="Выбрать" {...register('occupation')} required></option> */}
           <option value="admin" {...register("admin")} required>
-            Кредит.админ
+            Кредитный админ
           </option>
           <option value="spec" {...register("spec")} required>
-            Кредит.спец
+            Кредититный спец
           </option>
         </select>
       </div>

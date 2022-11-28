@@ -1,84 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
-export const fetchEntities = createAsyncThunk(
-  "counterparties",
-  async (
-    {
-      id_credit_spec,
-      client_company,
-      full_name_director,
-      inn,
-      credit_type,
-      status,
-      credit_sum,
-      phone,
-      address,
-      client_actual_address,
-      mortgaged_property,
-      average_salary,
-      own_contribution,
-      assets,
-      current_loan,
-      id_company,
-      id_property,
-      id_num_parley,
-    },
-    { rejectWithValue }
-  ) => {
-    try {
-      const token = JSON.parse(localStorage.getItem("userToken"));
-      console.log(token.access);
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token.access}`,
-        },
-      };
-
-      const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/crm/api/entity/`,
-        {
-          id_credit_spec,
-          client_company,
-          full_name_director,
-          inn,
-          credit_type,
-          status,
-          credit_sum,
-          phone,
-          address,
-          client_actual_address,
-          mortgaged_property,
-          average_salary,
-          own_contribution,
-          assets,
-          current_loan,
-          id_company,
-          id_property,
-          id_num_parley,
-        },
-        config
-      );
-      return data;
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
-    }
-  }
-);
+import { deleteEntity, getEntities } from "./entityActions";
+import { fetchEntities } from "./entityActions";
 
 const initialState = {
   loading: false,
   error: null,
   success: false,
   entityUserInfo: null,
+  getLoading: false,
+  getError: null,
+  getSuccess: false,
+  entities: null,
+  deleteLoading: false,
+  deleteError: null,
+  deleteSuccess: false,
+  entityDel: null,
 };
 
-const entitySlise = createSlice({
+const entitySlice = createSlice({
   name: "entity",
   initialState,
   reducers: {},
@@ -95,7 +34,31 @@ const entitySlise = createSlice({
       state.loading = false;
       state.error = payload;
     },
+    [getEntities.pending]: (state) => {
+      state.getLoading = true;
+      state.getError = null;
+    },
+    [getEntities.fulfilled]: (state, { payload }) => {
+      state.getLoading = false;
+      state.entities = payload;
+    },
+    [getEntities.rejected]: (state, { payload }) => {
+      state.getLoading = false;
+      state.getError = payload;
+    },
+    [deleteEntity.pending]: (state) => {
+      state.deleteLoading = true;
+      state.deleteError = null;
+    },
+    [deleteEntity.fulfilled]: (state, { payload }) => {
+      state.deleteLoading = false;
+      state.entityDel = payload;
+    },
+    [deleteEntity.rejected]: (state, { payload }) => {
+      state.deleteLoading = false;
+      state.deleteError = payload;
+    },
   },
 });
 
-export default entitySlise.reducer;
+export default entitySlice.reducer;
