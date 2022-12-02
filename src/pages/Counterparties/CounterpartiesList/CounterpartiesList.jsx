@@ -4,7 +4,7 @@ import cls from "./counterpartiesList.module.scss";
 import ClientsList from "./ClientsList";
 import EntitiesList from "./EntitiesList";
 const CounterpartiesList = () => {
-    const [value, setValue] = useState(1);
+  const [value, setValue] = useState(1);
   function changeValue(e) {
     setValue(e.target.value);
   }
@@ -33,7 +33,7 @@ const CounterpartiesList = () => {
             />
           </label>
         </div>
-        {value == 1 ? <ClientsList/> : <EntitiesList/>}
+        {value == 1 ? <ClientsList /> : <EntitiesList />}
       </div>
     </Layout>
   );

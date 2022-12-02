@@ -4,6 +4,19 @@
   gap: 30px;
   margin-top: 30px;
   padding-bottom: 15px;
+  .title{
+    font-weight: 400;
+    font-style: normal;
+    font-size: 26px;
+    margin-top: 20px;
+  }
+  .file__name{
+    max-width: 90%;
+    font-size: 16px;
+    overflow: hidden;
+    color: #42b4f4;
+    margin-top: -20px;
+  }
   h2 {
     font-weight: 400;
     font-size: 24px;

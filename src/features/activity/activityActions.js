@@ -26,6 +26,31 @@ export const fetchActivites = createAsyncThunk(
     }
   }
 );
+export const patchActivity = createAsyncThunk(
+  "activity/patch",
+  async ({ obj, id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.patch(
+        `https://baitushumdemo.herokuapp.com/crm/api/activity/${id}/`,
+        obj,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 export const getActivities = createAsyncThunk(
   "getActivities",
   async (arg, { getState, rejectWithValue }) => {

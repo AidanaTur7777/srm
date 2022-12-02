@@ -44,7 +44,55 @@ export const fetchGuarantors = createAsyncThunk(
     }
   }
 );
+export const patchGuarantor = createAsyncThunk(
+  "guarantor/patch",
+  async ({ obj, id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
 
+      const { data } = await axios.patch(
+        `https://baitushumdemo.herokuapp.com/crm/api/guarant/${id}/`,
+        obj,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+export const getGuarantor = createAsyncThunk(
+  "guarantor/get",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      console.log(id);
+      const { data } = await axios.get(
+        `https://baitushumdemo.herokuapp.com/crm/api/guarant/${id}/`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 export const getGuarantors = createAsyncThunk(
   "getGuarantors",
   async (arg, { getState, rejectWithValue }) => {

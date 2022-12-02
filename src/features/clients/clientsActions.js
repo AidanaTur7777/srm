@@ -72,6 +72,54 @@ export const fetchClients = createAsyncThunk(
     }
   }
 );
+export const patchClient = createAsyncThunk(
+  "client/patch",
+  async ({ obj, id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.patch(
+        `https://baitushumdemo.herokuapp.com/crm/api/client/${id}/`,
+        obj,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+export const getClient = createAsyncThunk(
+  "client/get",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.get(
+        `https://baitushumdemo.herokuapp.com/crm/api/client/${id}/`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 export const getClients = createAsyncThunk(
   "getClients",
   async (arg, { getState, rejectWithValue }) => {

@@ -1,12 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteEntity, getEntities } from "./entityActions";
+import {
+  deleteEntity,
+  getEntities,
+  getEntity,
+  patchEntity,
+} from "./entityActions";
 import { fetchEntities } from "./entityActions";
 
 const initialState = {
   loading: false,
   error: null,
   success: false,
-  entityUserInfo: null,
+  entityInfo: null,
+  patchLoading: false,
+  patchError: null,
+  patchSuccess: false,
   getLoading: false,
   getError: null,
   getSuccess: false,
@@ -25,14 +33,31 @@ const entitySlice = createSlice({
     [fetchEntities.pending]: (state) => {
       state.loading = true;
       state.error = null;
+      state.success = false;
     },
     [fetchEntities.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.entityUserInfo = payload;
+      state.success = true;
     },
     [fetchEntities.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      state.success = false;
+    },
+    [patchEntity.pending]: (state) => {
+      state.patchLoading = true;
+      state.patchError = null;
+      state.patchSuccess = false;
+    },
+    [patchEntity.fulfilled]: (state, { payload }) => {
+      state.patchLoading = false;
+      state.patchSuccess = true;
+      state.patchError = null;
+    },
+    [patchEntity.rejected]: (state, { payload }) => {
+      state.patchLoading = false;
+      state.patchError = payload;
+      state.patchSuccess = false;
     },
     [getEntities.pending]: (state) => {
       state.getLoading = true;
@@ -46,17 +71,31 @@ const entitySlice = createSlice({
       state.getLoading = false;
       state.getError = payload;
     },
+    [getEntity.pending]: (state) => {
+      state.getLoading = true;
+      state.getError = null;
+    },
+    [getEntity.fulfilled]: (state, { payload }) => {
+      state.getLoading = false;
+      state.entityInfo = payload;
+    },
+    [getEntity.rejected]: (state, { payload }) => {
+      state.getLoading = false;
+      state.getError = payload;
+    },
     [deleteEntity.pending]: (state) => {
       state.deleteLoading = true;
       state.deleteError = null;
+      state.deleteSuccess = false;
     },
     [deleteEntity.fulfilled]: (state, { payload }) => {
       state.deleteLoading = false;
-      state.entityDel = payload;
+      state.deleteSuccess = true;
     },
     [deleteEntity.rejected]: (state, { payload }) => {
       state.deleteLoading = false;
       state.deleteError = payload;
+      state.deleteSuccess = false;
     },
   },
 });

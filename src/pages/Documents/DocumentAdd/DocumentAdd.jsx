@@ -210,15 +210,6 @@ const DocumentAdd = () => {
             </div>
             {error && error.id_entity && <Error>{error.id_entity}</Error>}
           </div>
-          <div className={cl.documents__category}>
-            <h2 className={cl.documents__title}>Кредитный спец:</h2>
-            <input
-              className={cl.documents__input}
-              onChange={handleInput}
-              name="id_spec"
-              disabled
-            />
-          </div>
           {loading && <Loading>Отправка...</Loading>}
           {error && (
             <Error style={{ fontSize: "20px" }}>

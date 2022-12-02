@@ -6,16 +6,21 @@ import { useNavigate } from "react-router";
 import Table from "../../../components/Table/Table";
 import {
   deleteConversation,
+  getConversation,
   getConversations,
 } from "../../../features/conversations/conversationsActions";
 import { BiSearch } from "react-icons/bi";
+import Loading from "../../../components/Loading/Loading";
+import Success from "../../../components/Success/Success";
 const ConversationsList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getConversations());
   }, [dispatch]);
-  const { conversations } = useSelector((state) => state.conversations);
+  const { conversations, deleteLoading, deleteSuccess } = useSelector(
+    (state) => state.conversations
+  );
   const [conversationsList, setConversationsList] = useState(
     conversations && conversations
   );
@@ -48,6 +53,11 @@ const ConversationsList = () => {
     });
   };
   const [searchValue, setSearchValue] = useState("");
+  const navigateToConversation = (id) => {
+    dispatch(getConversation({ id: id })).then(() =>
+      navigate(`/conversations/conversation/${id}`)
+    );
+  };
   return (
     <Layout>
       <div className={cl.container}>
@@ -73,6 +83,8 @@ const ConversationsList = () => {
               Удалить
             </button>
           </div>
+          {deleteSuccess && <Success>Документы были успешно удалены</Success>}
+          {deleteLoading && <Loading>Удаление...</Loading>}
           <div className={cl.content__list}>
             {conversationsList && (
               <Table>
@@ -107,7 +119,12 @@ const ConversationsList = () => {
                           onChange={handleChange}
                         />
                       </td>
-                      <td className="main_field">{conversation.id}</td>
+                      <td
+                        className="main_field"
+                        onClick={() => navigateToConversation(conversation.id)}
+                      >
+                        {conversation.id}
+                      </td>
                       <td>{conversation.name}</td>
                       <td>{conversation.date}</td>
                     </tr>

@@ -8,11 +8,14 @@ const userToken = localStorage.getItem("userToken")
 
 const initialState = {
   loading: false,
+  error: null,
   userInfo: null,
+  success: false,
   isAuth:false,
   userToken,
-  error: null,
-  success: false,
+  registerLoading: false,
+  registerError: null,
+  registerSuccess: false,
 };
 
 const userSlice = createSlice({
@@ -35,7 +38,6 @@ const userSlice = createSlice({
     },
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = payload;
       state.userToken = payload.userToken;
       state.isAuth=true;
     },
@@ -44,16 +46,17 @@ const userSlice = createSlice({
       state.error = payload;
     },
     [registerUser.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
+      state.registerLoading = true;
+      state.registerError = null;
     },
     [registerUser.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.success = true;
+      state.registerLoading = false;
+      state.registerSuccess = true;
     },
     [registerUser.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = payload;
+      state.registerLoading = false;
+      state.registerError = payload;
+      state.registerSuccess = false;
     },
     [getUserDetail.pending]: (state) => {
       state.loading = true;

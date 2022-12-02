@@ -1,6 +1,5 @@
 import { Form, Input } from "antd";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../components/Button/Button";
 import Error from "../../../components/Error/Error";
@@ -25,7 +24,7 @@ const ConversationsContent = () => {
     time: "",
     desc: "",
     results_report: null,
-    file_statistics: null,
+    statistics: null,
   });
   const dispatch = useDispatch();
   const submitForm = () => {
@@ -167,7 +166,7 @@ const ConversationsContent = () => {
             }}
           />
         </Form.Item>
-        {error && error.statisctics && <Error>{error.statisctics}</Error>}
+        {error && error.statistics && <Error>{error.statistics}</Error>}
       </div>
       {loading && <Loading>Отправка...</Loading>}
       {error && (

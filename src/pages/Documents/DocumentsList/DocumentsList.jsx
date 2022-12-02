@@ -1,10 +1,14 @@
+import Modal from "antd/lib/modal/Modal";
 import React, { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import Loading from "../../../components/Loading/Loading";
+import Success from "../../../components/Success/Success";
 import Table from "../../../components/Table/Table";
 import {
   deleteDocument,
+  getDocument,
   getDocuments,
 } from "../../../features/documents/documentsActions";
 import Layout from "../../../Layout/Layout";
@@ -15,11 +19,15 @@ const DocumentsList = () => {
   useEffect(() => {
     dispatch(getDocuments());
   }, [dispatch]);
-  const { documentsList } = useSelector((state) => state.documents);
+  const { documentsList, deleteSuccess, deleteLoading } = useSelector(
+    (state) => state.documents
+  );
   const deleteDoc = () => {
     documents.map((doc) => {
       if (doc?.isChecked) {
-        dispatch(deleteDocument({ id: doc.id })).then(() => dispatch(getDocuments()));
+        dispatch(deleteDocument({ id: doc.id })).then(() =>
+          dispatch(getDocuments())
+        );
       }
     });
   };
@@ -43,7 +51,12 @@ const DocumentsList = () => {
   };
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
-
+  const navigateToDocument = (id) => {
+    console.log("id ", id);
+    dispatch(getDocument({ id: id })).then(() =>
+      navigate(`/documents/document/${id}`)
+    );
+  };
   return (
     <Layout>
       <div className={cl.container}>
@@ -67,6 +80,8 @@ const DocumentsList = () => {
               Удалить
             </button>
           </div>
+          {deleteSuccess && <Success>Документы были успешно удалены</Success>}
+          {deleteLoading && <Loading>Удаление...</Loading>}
           <div className={cl.content__list}>
             {documents && (
               <Table>
@@ -101,7 +116,12 @@ const DocumentsList = () => {
                           onChange={handleChange}
                         />
                       </td>
-                      <td className="main_field">{document.id}</td>
+                      <td
+                        className="main_field"
+                        onClick={() => navigateToDocument(document.id)}
+                      >
+                        {document.id}
+                      </td>
                       <td>{document.scoring}</td>
                       <td>{document.created_date}</td>
                     </tr>

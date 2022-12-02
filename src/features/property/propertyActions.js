@@ -22,8 +22,33 @@ export const fetchProperties = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+export const patchProperty = createAsyncThunk(
+  "property/patch",
+  async ({ obj, id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.patch(
+        `https://baitushumdemo.herokuapp.com/crm/api/property/${id}/`,
+        obj,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
       }

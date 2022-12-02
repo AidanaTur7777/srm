@@ -51,6 +51,32 @@ export const fetchCompany = createAsyncThunk(
     }
   }
 );
+
+export const patchCompany = createAsyncThunk(
+  "company/patch",
+  async ({ obj, id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.patch(
+        `https://baitushumdemo.herokuapp.com/crm/api/company/${id}/`,
+        obj,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 export const getCompanies = createAsyncThunk(
   "companies/get",
   async (arg, { rejectWithValue }) => {
@@ -62,6 +88,30 @@ export const getCompanies = createAsyncThunk(
       };
       const { data } = await axios.get(
         `https://baitushumdemo.herokuapp.com/crm/api/company/`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+export const getCompany = createAsyncThunk(
+  "company/get",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      console.log(id);
+      const { data } = await axios.get(
+        `https://baitushumdemo.herokuapp.com/crm/api/company/${id}/`,
         config
       );
       return data;
@@ -92,6 +142,7 @@ export const deleteCompany = createAsyncThunk(
       );
       return data;
     } catch (error) {
+      console.log(error);
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {

@@ -59,6 +59,7 @@ const Individuals = () => {
     dispatch(getProperties());
     dispatch(getConversations());
   }, [dispatch]);
+  console.log(properties);
   const submitForm = async (e) => {
     dispatch(fetchClients(state)).then(() => dispatch(getClients()));
   };
@@ -68,6 +69,11 @@ const Individuals = () => {
   const { loading, error, success } = useSelector(
     (state) => state.counterparties
   );
+  // console.log(propertyInfo);
+  // useEffect(()=>{
+  //   setState({...state, id_property: propertyInfo && propertyInfo.id})
+  // },[propertyInfo])
+  // console.log(state.id_property);
   //-------------------------------------------
 
   //---Modals----------------------------------
@@ -413,10 +419,11 @@ const Individuals = () => {
               className={cl.counterparties__accor}
               showSearch
               allowClear
+              fieldNames={{ label: "type", value: "id" }}
+              //value={state.id_property}
               onChange={(e) => {
                 setState({ ...state, id_property: e });
               }}
-              fieldNames={{ label: "type", value: "id" }}
               filterOption={(input, option) =>
                 (option?.type.toLocaleLowerCase() ?? "").includes(
                   input.toLocaleLowerCase()

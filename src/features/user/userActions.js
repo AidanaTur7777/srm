@@ -19,11 +19,7 @@ export const userLogin = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
+      return rejectWithValue(error);
     }
   }
 );
@@ -36,18 +32,20 @@ export const updateToken = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const refreshToken = JSON.parse(localStorage.getItem("userToken")).refresh;
+      const refreshToken = JSON.parse(
+        localStorage.getItem("userToken")
+      ).refresh;
       const { data } = await axios.post(
         `https://baitushumdemo.herokuapp.com/auth/jwt/refresh/`,
         { refreshToken },
         config
       );
       localStorage.setItem("userToken", JSON.stringify(data));
-      console.log("refreshToken",data);
+      console.log("refreshToken", data);
       return data;
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
+      if (error.response.status != 500) {
+        return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
       }
@@ -92,14 +90,15 @@ export const registerUser = createAsyncThunk(
         config
       );
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
+      if (error.response.status != 500) {
+        return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
       }
     }
   }
 );
+
 export const registerClient = createAsyncThunk(
   "users",
   async (
@@ -145,8 +144,8 @@ export const getUserDetail = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
+      if (error.response.status != 500) {
+        return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
       }

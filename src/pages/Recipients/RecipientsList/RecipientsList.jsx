@@ -6,9 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Table from "../../../components/Table/Table";
 import {
   deleteGuarantor,
+  getGuarantor,
   getGuarantors,
 } from "../../../features/guarantors/guarantorsActions";
 import { BiSearch } from "react-icons/bi";
+import Loading from "../../../components/Loading/Loading";
+import Success from "../../../components/Success/Success";
 
 const RecipientsList = () => {
   const navigate = useNavigate();
@@ -16,7 +19,9 @@ const RecipientsList = () => {
   useEffect(() => {
     dispatch(getGuarantors());
   }, [dispatch]);
-  const { guarantors } = useSelector((state) => state.guarantor);
+  const { guarantors, deleteLoading, deleteSuccess } = useSelector(
+    (state) => state.guarantor
+  );
   const [guarantorsList, setGuarantorsList] = useState(
     guarantors && guarantors
   );
@@ -46,6 +51,11 @@ const RecipientsList = () => {
       }
     });
   };
+  const navigateToRecipient = (id) => {
+    dispatch(getGuarantor({ id: id })).then(() =>
+      navigate(`/recipients/recipient/${id}`)
+    );
+  };
   const [searchValue, setSearchValue] = useState("");
   return (
     <Layout>
@@ -70,6 +80,8 @@ const RecipientsList = () => {
               Удалить
             </button>
           </div>
+          {deleteSuccess && <Success>Документы были успешно удалены</Success>}
+          {deleteLoading && <Loading>Удаление...</Loading>}
           <div className={cl.content__list}>
             {guarantorsList && (
               <Table>
@@ -104,7 +116,12 @@ const RecipientsList = () => {
                           onChange={handleChange}
                         />
                       </td>
-                      <td className="main_field">{guarantor.id}</td>
+                      <td
+                        className="main_field"
+                        onClick={() => navigateToRecipient(guarantor.id)}
+                      >
+                        {guarantor.id}
+                      </td>
                       <td>{guarantor.full_name}</td>
                       <td>{guarantor.address}</td>
                     </tr>

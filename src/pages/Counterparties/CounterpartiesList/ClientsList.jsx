@@ -5,16 +5,21 @@ import cl from "../../Documents/DocumentsList/documentsList.module.scss";
 import { useNavigate } from "react-router";
 import {
   deleteClient,
+  getClient,
   getClients,
 } from "../../../features/clients/clientsActions";
 import { BiSearch } from "react-icons/bi";
+import Success from "../../../components/Success/Success";
+import Loading from "../../../components/Loading/Loading";
 const ClientsList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClients());
   }, [dispatch]);
-  const { clients } = useSelector((state) => state.counterparties);
+  const { clients, deleteSuccess, deleteLoading } = useSelector(
+    (state) => state.counterparties
+  );
   const [clientsList, setClientsList] = useState(clients && clients);
   useEffect(() => {
     setClientsList(clients);
@@ -43,6 +48,11 @@ const ClientsList = () => {
     });
   };
   const [searchValue, setSearchValue] = useState("");
+  const navigateToClient = (id) => {
+    dispatch(getClient({ id: id })).then(() =>
+      navigate(`/counterparties/client/${id}`)
+    );
+  };
   return (
     <div className={cl.container}>
       <div className={cl.container__header}>
@@ -67,6 +77,8 @@ const ClientsList = () => {
             Удалить
           </button>
         </div>
+        {deleteSuccess && <Success>Документы были успешно удалены</Success>}
+        {deleteLoading && <Loading>Удаление...</Loading>}
         <div className={cl.content__list}>
           {clientsList && (
             <Table>
@@ -99,7 +111,12 @@ const ClientsList = () => {
                         onChange={handleChange}
                       />
                     </td>
-                    <td className="main_field">{client.id}</td>
+                    <td
+                      className="main_field"
+                      onClick={() => navigateToClient(client.id)}
+                    >
+                      {client.id}
+                    </td>
                     <td>{client.full_name}</td>
                     {client.credit_type == "CR" ? (
                       <td>Кредит</td>

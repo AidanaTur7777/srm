@@ -23,7 +23,6 @@ const CompaniesContent = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCompany());
-    dispatch(fetchActivites());
     dispatch(getActivities());
   }, [dispatch]);
   const submitForm = () => {
@@ -32,7 +31,6 @@ const CompaniesContent = () => {
   const { error, loading, company, success } = useSelector(
     (state) => state.companies
   );
-  console.log(error);
   const { activities } = useSelector((state) => state.activites);
   const [state, setState] = useState({
     company_name: "",
@@ -59,16 +57,6 @@ const CompaniesContent = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState(error && true);
-  const showErrorModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleErrorOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleErrorCancel = () => {
     setIsModalOpen(false);
   };
   //-------------------------------------------

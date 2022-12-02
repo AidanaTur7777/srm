@@ -5,7 +5,7 @@ import PropertyContent from "./PropertyContent";
 const PropertyAdd = () => {
   return (
     <Layout>
-      <PropertyContent/>
+      <PropertyContent />
     </Layout>
   );
 };

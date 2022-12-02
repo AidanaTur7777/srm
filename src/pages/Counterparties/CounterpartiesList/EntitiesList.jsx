@@ -8,6 +8,8 @@ import {
   getEntities,
 } from "../../../features/entity/entityActions";
 import { BiSearch } from "react-icons/bi";
+import Loading from "../../../components/Loading/Loading";
+import Success from "../../../components/Success/Success";
 
 const EntitiesList = () => {
   const navigate = useNavigate();
@@ -15,7 +17,9 @@ const EntitiesList = () => {
   useEffect(() => {
     dispatch(getEntities());
   }, [dispatch]);
-  const { entities } = useSelector((state) => state.entity);
+  const { entities, deleteSuccess, deleteLoading } = useSelector(
+    (state) => state.entity
+  );
   const [entitiesList, setEntitiesList] = useState(entities && entities);
   useEffect(() => {
     setEntitiesList(entities);
@@ -44,6 +48,11 @@ const EntitiesList = () => {
     });
   };
   const [searchValue, setSearchValue] = useState("");
+  const navigateToEntity = (id) => {
+    dispatch(getEntities({ id: id })).then(() =>
+      navigate(`/counterparties/entity/${id}`)
+    );
+  };
   return (
     <div className={cl.container}>
       <div className={cl.container__header}>
@@ -68,6 +77,8 @@ const EntitiesList = () => {
             Удалить
           </button>
         </div>
+        {deleteSuccess && <Success>Документы были успешно удалены</Success>}
+        {deleteLoading && <Loading>Удаление...</Loading>}
         <div className={cl.content__list}>
           {entitiesList && (
             <Table>
@@ -100,7 +111,12 @@ const EntitiesList = () => {
                         onChange={handleChange}
                       />
                     </td>
-                    <td className="main_field">{entity.id}</td>
+                    <td
+                      className="main_field"
+                      onClick={() => navigateToEntity(entity.id)}
+                    >
+                      {entity.id}
+                    </td>
                     <td>{entity.full_name_director}</td>
                     <td>{entity.client_company}</td>
                   </tr>

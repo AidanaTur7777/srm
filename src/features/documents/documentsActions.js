@@ -47,6 +47,31 @@ export const fetchDocuments = createAsyncThunk(
     }
   }
 );
+export const patchDocument = createAsyncThunk(
+  "document/patch",
+  async ({ obj, id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.patch(
+        `https://baitushumdemo.herokuapp.com/crm/api/dataKK/${id}/`,
+        obj,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 export const getDocuments = createAsyncThunk(
   "getDocuments",
   async (arg, { getState, rejectWithValue }) => {
@@ -70,7 +95,30 @@ export const getDocuments = createAsyncThunk(
     }
   }
 );
-
+export const getDocument = createAsyncThunk(
+  "document/get",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      console.log(id);
+      const { data } = await axios.get(
+        `https://baitushumdemo.herokuapp.com/crm/api/dataKK/${id}/`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 export const deleteDocument = createAsyncThunk(
   "deleteDocument",
   async ({ id }, { rejectWithValue }) => {

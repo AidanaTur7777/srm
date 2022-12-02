@@ -1,8 +1,21 @@
 .documents {
   padding-top: 20px;
+  .title {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 26px;
+    margin-top: 20px;
+  }
   .documents__category {
     margin-top: 50px;
     position: relative;
+    .file__name{
+      max-width: 90%;
+      font-size: 16px;
+      overflow: hidden;
+      color: #42b4f4;
+      margin-top: 10px;
+    }
     .add__svg {
       width: 20px;
       height: 20px;

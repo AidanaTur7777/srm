@@ -36,6 +36,54 @@ export const fetchConversations = createAsyncThunk(
     }
   }
 );
+export const patchConversation = createAsyncThunk(
+  "convers/patch",
+  async ({ obj, id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.patch(
+        `https://baitushumdemo.herokuapp.com/crm/api/convers/${id}/`,
+        obj,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+export const getConversation = createAsyncThunk(
+  "conversation/get",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.get(
+        `https://baitushumdemo.herokuapp.com/crm/api/convers/${id}/`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 export const getConversations = createAsyncThunk(
   "getConversations",
   async (arg, { getState, rejectWithValue }) => {
@@ -61,7 +109,7 @@ export const getConversations = createAsyncThunk(
   }
 );
 
-export const deleteConversation= createAsyncThunk(
+export const deleteConversation = createAsyncThunk(
   "deleteConversation",
   async ({ id }, { rejectWithValue }) => {
     try {
