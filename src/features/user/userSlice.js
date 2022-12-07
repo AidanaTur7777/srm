@@ -11,7 +11,7 @@ const initialState = {
   error: null,
   userInfo: null,
   success: false,
-  isAuth:false,
+  isAuth: localStorage.getItem("isAuth") ? true : false,
   userToken,
   registerLoading: false,
   registerError: null,
@@ -24,6 +24,7 @@ const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       localStorage.removeItem("userToken");
+      localStorage.removeItem("isAuth");
       state.isAuth=false;
       state.loading = false;
       state.userInfo = null;
@@ -35,6 +36,7 @@ const userSlice = createSlice({
     [userLogin.pending]: (state) => {
       state.loading = true;
       state.error = null;
+      state.isAuth=false;
     },
     [userLogin.fulfilled]: (state, { payload }) => {
       state.loading = false;
@@ -44,6 +46,10 @@ const userSlice = createSlice({
     [userLogin.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      state.isAuth=false;
+    },
+    [updateToken.fulfilled]: (state, { payload }) => {
+      state.userToken = payload;
     },
     [registerUser.pending]: (state) => {
       state.registerLoading = true;

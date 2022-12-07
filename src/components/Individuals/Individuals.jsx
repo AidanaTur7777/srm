@@ -8,7 +8,10 @@ import Recipients from "../../pages/Recipients/RecipientsAdd/RecipientsContent";
 import { BsPlusLg } from "react-icons/bs";
 import { getUserDetail } from "../../features/user/userActions";
 import ConversationsContent from "../../pages/Conversations/ConversationsAdd/ConversationsContent";
-import { getGuarantors } from "../../features/guarantors/guarantorsActions";
+import {
+  getGuarantor,
+  getGuarantors,
+} from "../../features/guarantors/guarantorsActions";
 import { getConversations } from "../../features/conversations/conversationsActions";
 import {
   fetchClients,
@@ -19,6 +22,9 @@ import PropertyContent from "../../pages/Property/PropertyAdd/PropertyContent";
 import Error from "../Error/Error";
 import Success from "../Success/Success";
 import Loading from "../Loading/Loading";
+import { RiPencilFill } from "react-icons/ri";
+import RecipientIdPageContent from "../../pages/Recipients/RecipientIdPage/RecipietntIdPageContent";
+import { useNavigate } from "react-router";
 
 const Individuals = () => {
   //-----------API---------------------
@@ -30,6 +36,7 @@ const Individuals = () => {
   const { conversationInfo, conversations } = useSelector(
     (state) => state.conversations
   );
+  const navigate = useNavigate();
   const [state, setState] = useState({
     id_credit_spec: "",
     full_name: "",
@@ -43,12 +50,11 @@ const Individuals = () => {
     phone: "",
     address: "",
     client_actual_address: "",
-    guarantor: "",
     income_statement: null,
     contracts: null,
     report: null,
     monitoring_report: null,
-    id_guarantor: null,
+    guarantor: null,
     id_property: null,
     meet_conversation: null,
   });
@@ -59,7 +65,6 @@ const Individuals = () => {
     dispatch(getProperties());
     dispatch(getConversations());
   }, [dispatch]);
-  console.log(properties);
   const submitForm = async (e) => {
     dispatch(fetchClients(state)).then(() => dispatch(getClients()));
   };
@@ -69,6 +74,11 @@ const Individuals = () => {
   const { loading, error, success } = useSelector(
     (state) => state.counterparties
   );
+  const reversed = (arr) => {
+    const arr2 = [...arr];
+    arr2.reverse();
+    return arr2;
+  };
   // console.log(propertyInfo);
   // useEffect(()=>{
   //   setState({...state, id_property: propertyInfo && propertyInfo.id})
@@ -108,6 +118,17 @@ const Individuals = () => {
   };
   const handleCancelThree = () => {
     setIsModalOpenThree(false);
+  };
+
+  const [isModalOpenFour, setIsModalOpenFour] = useState(false);
+  const showModalFour = () => {
+    setIsModalOpenFour(true);
+  };
+  const handleOkFour = () => {
+    setIsModalOpenFour(false);
+  };
+  const handleCancelFour = () => {
+    setIsModalOpenFour(false);
   };
   //-------------------------------------------
   return (
@@ -272,7 +293,7 @@ const Individuals = () => {
             maxLength="100"
           />
         </Form.Item>
-        {error && error.status && <Error>{error.status}</Error>}
+        {error && error.phone && <Error>{error.phone}</Error>}
         <h2>Адрес прописки:</h2>
         <Form.Item
           name="address"
@@ -298,20 +319,6 @@ const Individuals = () => {
             placeholder="Тот же что и по прописке"
             onChange={handleInput}
             name="client_actual_address"
-            maxLength="100"
-          />
-        </Form.Item>
-        {error && error.status && <Error>{error.status}</Error>}
-        <h2>Поручитель:</h2>
-        <Form.Item
-          name="guarantor"
-          rules={[{ required: true, message: "Заполните это поле" }]}
-        >
-          <Input
-            className={cl.counterparties__input}
-            type="text"
-            onChange={handleInput}
-            name="guarantor"
             maxLength="100"
           />
         </Form.Item>
@@ -387,7 +394,7 @@ const Individuals = () => {
         <h2>Поручитель:</h2>
         <div className={cl.counterparties__flexContainer}>
           <Form.Item
-            name="id_guarantor"
+            name="guarantor"
             rules={[{ required: true, message: "Заполните это поле" }]}
           >
             <Select
@@ -395,7 +402,8 @@ const Individuals = () => {
               showSearch
               allowClear
               onChange={(e) => {
-                setState({ ...state, id_guarantor: e });
+                setState({ ...state, guarantor: e });
+                console.log(e);
               }}
               fieldNames={{ label: "full_name", value: "id" }}
               filterOption={(input, option) =>
@@ -403,12 +411,20 @@ const Individuals = () => {
                   input.toLocaleLowerCase()
                 )
               }
-              options={guarantors && guarantors}
+              options={guarantors && reversed(guarantors)}
             />
           </Form.Item>
           <BsPlusLg className={cl.add__svg} onClick={showModal} />
+          <RiPencilFill
+            className={cl.change__svg}
+            onClick={() => {
+              dispatch(getGuarantor(state.guarantor)).then(() => {
+                if (state.guarantor) showModalFour();
+              });
+            }}
+          />
         </div>
-        {error && error.id_guarantor && <Error>{error.id_guarantor}</Error>}
+        {error && error.guarantor && <Error>{error.guarantor}</Error>}
         <h2>Залоговое имущество:</h2>
         <div className={cl.counterparties__flexContainer}>
           <Form.Item
@@ -429,10 +445,11 @@ const Individuals = () => {
                   input.toLocaleLowerCase()
                 )
               }
-              options={properties && properties}
+              options={properties && reversed(properties)}
             />
           </Form.Item>
           <BsPlusLg className={cl.add__svg} onClick={showModalTwo} />
+          <RiPencilFill className={cl.change__svg} />
         </div>
         {error && error.id_property && <Error>{error.id_property}</Error>}
         <h2>Переговоры:</h2>
@@ -455,10 +472,11 @@ const Individuals = () => {
                     input.toLocaleLowerCase()
                   )
                 }
-                options={conversations && conversations}
+                options={conversations && reversed(conversations)}
               />
             </Form.Item>
             <BsPlusLg className={cl.add__svg} onClick={showModalThree} />
+            <RiPencilFill className={cl.change__svg} />
           </div>
           {error && error.meet_conversation && (
             <Error>{error.meet_conversation}</Error>
@@ -489,6 +507,13 @@ const Individuals = () => {
         onCancel={handleCancelThree}
       >
         <ConversationsContent />
+      </Modal>
+      <Modal
+        open={isModalOpenFour}
+        onOk={handleOkFour}
+        onCancel={handleCancelFour}
+      >
+        <RecipientIdPageContent />
       </Modal>
     </>
   );

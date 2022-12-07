@@ -9,17 +9,36 @@ const Navbar = () => {
   const location = useLocation();
   const [list, setList] = useState("Документы на КК");
   useEffect(() => {
-    if (location.pathname === "/documents" || location.pathname === "/documents/add") {
+    if (
+      location.pathname === "/documents" ||
+      location.pathname === "/documents/add" ||
+      location.pathname.includes("/documents/document/")
+    ) {
       setList("Документы на КК");
-    } else if (location.pathname === "/positions" || location.pathname === "/documents/add") {
-      setList("Должности");
-    } else if (location.pathname === "/companies" || location.pathname === "/companies/add") {
+    } else if (
+      location.pathname === "/companies" ||
+      location.pathname === "/companies/add" ||
+      location.pathname.includes("/companies/company/")
+    ) {
       setList("Компании");
-    } else if (location.pathname === "/counterparties" || location.pathname === "/counterparties/add") {
+    } else if (
+      location.pathname === "/counterparties" ||
+      location.pathname === "/counterparties/add" ||
+      location.pathname.includes("/counterparties/client/") ||
+      location.pathname.includes("/counterparties/entity/")
+    ) {
       setList("ЧП/ИП");
-    } else if (location.pathname === "/recipients" || location.pathname === "/recipients/add") {
+    } else if (
+      location.pathname === "/recipients" ||
+      location.pathname === "/recipients/add" ||
+      location.pathname.includes("/recipients/recipient/")
+    ) {
       setList("Поручители");
-    } else if (location.pathname === "/conversations" || location.pathname === "/conversations/add") {
+    } else if (
+      location.pathname === "/conversations" ||
+      location.pathname === "/conversations/add" ||
+      location.pathname.includes("/conversations/conversation/")
+    ) {
       setList("Тел. переговоры");
     } else {
       setList("Документы на КК");

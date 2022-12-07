@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchActivites, getActivities, patchActivity } from "./activityActions";
+import {
+  fetchActivites,
+  getActivities,
+  patchActivity,
+} from "./activityActions";
 
 const initialState = {
   loading: false,
@@ -20,14 +24,18 @@ const activitySlice = createSlice({
     [fetchActivites.pending]: (state) => {
       state.loading = true;
       state.error = null;
+      state.success = false;
     },
     [fetchActivites.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.activitesInfo = payload;
+      state.error = null;
+      state.success = true;
     },
     [fetchActivites.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      state.success = false;
     },
     [patchActivity.pending]: (state) => {
       state.patchLoading = true;

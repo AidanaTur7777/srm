@@ -11,12 +11,12 @@ export const userLogin = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/auth/jwt/create/`,
+        `http://127.0.0.1:8000/auth/jwt/create/`,
         { email, password },
         config
       );
       localStorage.setItem("userToken", JSON.stringify(data));
-      console.log(data);
+      localStorage.setItem("isAuth", JSON.stringify(true));
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -25,26 +25,26 @@ export const userLogin = createAsyncThunk(
 );
 export const updateToken = createAsyncThunk(
   "refresh",
-  async ({ rejectWithValue }) => {
+  async (arg, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
         },
       };
-      const refreshToken = JSON.parse(
+      const refresh = JSON.parse(
         localStorage.getItem("userToken")
       ).refresh;
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/auth/jwt/refresh/`,
-        { refreshToken },
+        `http://127.0.0.1:8000/auth/jwt/refresh/`,
+        { refresh },
         config
       );
       localStorage.setItem("userToken", JSON.stringify(data));
       console.log("refreshToken", data);
       return data;
     } catch (error) {
-      if (error.response.status != 500) {
+      if (error.response.status == 401 || error.response.status == 400) {
         return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
@@ -76,7 +76,7 @@ export const registerUser = createAsyncThunk(
       };
 
       await axios.post(
-        `https://baitushumdemo.herokuapp.com/register/spec/`,
+        `http://127.0.0.1:8000/register/spec/`,
         {
           email,
           password,
@@ -90,7 +90,8 @@ export const registerUser = createAsyncThunk(
         config
       );
     } catch (error) {
-      if (error.response.status != 500) {
+      console.log(error);
+      if (error.response.status == 401 || error.response.status == 400) {
         return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
@@ -113,12 +114,12 @@ export const registerClient = createAsyncThunk(
       };
 
       await axios.post(
-        `https://baitushumdemo.herokuapp.com/register/client/`,
+        `http://127.0.0.1:8000/register/client/`,
         { email, password, password_confirm, phone_number, full_name, address },
         config
       );
     } catch (error) {
-      if (error.response && error.response.data.message) {
+      if (error.response.status == 401 || error.response.status == 400) {
         return rejectWithValue(error.response.data.message);
       } else {
         return rejectWithValue(error.message);
@@ -139,12 +140,12 @@ export const getUserDetail = createAsyncThunk(
       };
 
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/client/`,
+        `http://127.0.0.1:8000/crm/api/client/`,
         config
       );
       return data;
     } catch (error) {
-      if (error.response.status != 500) {
+      if (error.response.status == 401 || error.response.status == 400) {
         return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);

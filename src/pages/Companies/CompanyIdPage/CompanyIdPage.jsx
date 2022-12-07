@@ -210,7 +210,7 @@ const CompanyIdPage = () => {
                 }}
               />
               <p className={cl.file__name}>
-                Текущий файл : {companyInfo.document}
+                Текущий файл : <a href={companyInfo.document}>{companyInfo.document}</a>
               </p>
               {patchError && patchError.document && (
                 <Error>{patchError.document}</Error>

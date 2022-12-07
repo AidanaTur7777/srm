@@ -17,12 +17,11 @@ export const fetchClients = createAsyncThunk(
       phone,
       address,
       client_actual_address,
-      guarantor,
       income_statement,
       contracts,
       report,
       monitoring_report,
-      id_guarantor,
+      guarantor,
       id_property,
       meet_conversation,
     },
@@ -37,7 +36,7 @@ export const fetchClients = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/crm/api/client/`,
+        `http://127.0.0.1:8000/crm/api/client/`,
         {
           id_credit_spec,
           full_name,
@@ -51,12 +50,11 @@ export const fetchClients = createAsyncThunk(
           phone,
           address,
           client_actual_address,
-          guarantor,
           income_statement,
           contracts,
           report,
           monitoring_report,
-          id_guarantor,
+          guarantor,
           id_property,
           meet_conversation,
         },
@@ -83,7 +81,7 @@ export const patchClient = createAsyncThunk(
       };
 
       const { data } = await axios.patch(
-        `https://baitushumdemo.herokuapp.com/crm/api/client/${id}/`,
+        `http://127.0.0.1:8000/crm/api/client/${id}/`,
         obj,
         config
       );
@@ -107,7 +105,7 @@ export const getClient = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/client/${id}/`,
+        `http://127.0.0.1:8000/crm/api/client/${id}/`,
         config
       );
       return data;
@@ -130,7 +128,7 @@ export const getClients = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/client/`,
+        `http://127.0.0.1:8000/crm/api/client/`,
         config
       );
       return data;
@@ -153,7 +151,7 @@ export const deleteClient = createAsyncThunk(
         },
       };
       const { data } = await axios.delete(
-        `https://baitushumdemo.herokuapp.com/crm/api/client/${id}/`,
+        `http://127.0.0.1:8000/crm/api/client/${id}/`,
         {
           id,
         },

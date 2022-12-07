@@ -12,7 +12,7 @@ export const fetchActivites = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/crm/api/activity/`,
+        `http://127.0.0.1:8000/crm/api/activity/`,
         { activites_add },
         config
       );
@@ -37,7 +37,7 @@ export const patchActivity = createAsyncThunk(
       };
 
       const { data } = await axios.patch(
-        `https://baitushumdemo.herokuapp.com/crm/api/activity/${id}/`,
+        `http://127.0.0.1:8000/crm/api/activity/${id}/`,
         obj,
         config
       );
@@ -61,7 +61,7 @@ export const getActivities = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/activity/`,
+        `http://127.0.0.1:8000/crm/api/activity/`,
         config
       );
       return data;

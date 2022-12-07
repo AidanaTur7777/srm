@@ -97,7 +97,10 @@ const DocumentIdPage = () => {
                 }
               />
               <p className={cl.file__name}>
-                Текущий файл : {documentInfo.credit_spec_report}
+                Текущий файл :{" "}
+                <a href={documentInfo.credit_spec_report}>
+                  {documentInfo.credit_spec_report}
+                </a>
               </p>
               {patchError && patchError.credit_spec_report && (
                 <Error>{patchError.credit_spec_report}</Error>
@@ -115,7 +118,10 @@ const DocumentIdPage = () => {
                 }
               />
               <p className={cl.file__name}>
-                Текущий файл : {documentInfo.committee_decision}
+                Текущий файл :{" "}
+                <a href={documentInfo.committee_decision}>
+                  {documentInfo.committee_decision}
+                </a>
               </p>
               {patchError && patchError.committee_decision && (
                 <Error>{patchError.committee_decision}</Error>
@@ -135,7 +141,10 @@ const DocumentIdPage = () => {
                 }
               />
               <p className={cl.file__name}>
-                Текущий файл : {documentInfo.all_contracts}
+                Текущий файл :{" "}
+                <a href={documentInfo.all_contracts}>
+                  {documentInfo.all_contracts}
+                </a>
               </p>
               {patchError && patchError.all_contracts && (
                 <Error>{patchError.all_contracts}</Error>

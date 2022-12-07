@@ -31,7 +31,7 @@ const EntityIdPage = () => {
   const { conversations } = useSelector((state) => state.conversations);
   const { companies } = useSelector((state) => state.companies);
   const { activities } = useSelector((state) => state.activites);
-  const { patchLoading, patchSuccess, patchError, entityInfo } = useSelector(
+  const { entityInfo, patchLoading, patchSuccess, patchError } = useSelector(
     (state) => state.entity
   );
   const [state, setState] = useState({});
@@ -44,15 +44,17 @@ const EntityIdPage = () => {
     dispatch(getConversations());
   }, [dispatch]);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!entityInfo) navigate("/counterparties");
-  }, []);
+  
   const submitForm = () => {
     dispatch(patchEntity(state)).then(() => dispatch(getEntities()));
   };
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
+  useEffect(() => {
+    console.log(entityInfo);
+    if (!entityInfo) navigate("/counterparties");
+  }, []);
   //-------------------------------------------
 
   //---Modals----------------------------------
@@ -233,7 +235,10 @@ const EntityIdPage = () => {
                   }
                 />
                 <p className={cl.file__name}>
-                  Текущий файл : {entityInfo.repaid_by_redemption}
+                  Текущий файл :{" "}
+                  <a href={entityInfo.repaid_by_redemption}>
+                    {entityInfo.repaid_by_redemption}
+                  </a>
                 </p>
                 {patchError && patchError.repaid_by_redemption && (
                   <Error>{patchError.repaid_by_redemption}</Error>
@@ -255,7 +260,10 @@ const EntityIdPage = () => {
                   }
                 />
                 <p className={cl.file__name}>
-                  Текущий файл : {entityInfo.court_documents}
+                  Текущий файл :{" "}
+                  <a href={entityInfo.court_documents}>
+                    {entityInfo.court_documents}
+                  </a>
                 </p>
                 {patchError && patchError.court_documents && (
                   <Error>{patchError.court_documents}</Error>
@@ -318,32 +326,7 @@ const EntityIdPage = () => {
             {patchError && patchError.client_actiual_address && (
               <Error>{patchError.client_actiual_address}</Error>
             )}
-            <h2>Источник дохода:</h2>
-            <div className={cl.counterparties__flexContainer}>
-              <Select
-                className={cl.counterparties__accor}
-                showSearch
-                allowClear
-                defaultValue={{
-                  label: entityInfo.souce_of_income,
-                  value: entityInfo.souce_of_income,
-                }}
-                onChange={(e) => {
-                  setState({ ...state, souce_of_income: e });
-                }}
-                fieldNames={{ label: "activites_add", value: "id" }}
-                filterOption={(input, option) =>
-                  (option?.activites_add.toLocaleLowerCase() ?? "").includes(
-                    input.toLocaleLowerCase()
-                  )
-                }
-                options={activities && activities}
-              />
-              <BsPlusLg className={cl.add__svg} onClick={showModalFive} />
-            </div>
-            {patchError && patchError.activites_add && (
-              <Error>{patchError.activites_add}</Error>
-            )}
+            
             <h2>Средний доход в месяц:</h2>
             <Input
               className={cl.counterparties__input}

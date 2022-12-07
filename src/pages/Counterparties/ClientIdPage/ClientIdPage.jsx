@@ -161,7 +161,10 @@ const ClientIdPage = () => {
                   }
                 />
                 <p className={cl.file__name}>
-                  Текущий файл : {clientInfo.repaid_by_redemption}
+                  Текущий файл :{" "}
+                  <a href={clientInfo.repaid_by_redemption}>
+                    {clientInfo.repaid_by_redemption}
+                  </a>
                 </p>
                 {patchError && patchError.repaid_by_redemption && (
                   <Error>{patchError.repaid_by_redemption}</Error>
@@ -182,7 +185,10 @@ const ClientIdPage = () => {
                   }
                 />
                 <p className={cl.file__name}>
-                  Текущий файл : {clientInfo.court_documents}
+                  Текущий файл :{" "}
+                  <a href={clientInfo.court_documents}>
+                    {clientInfo.court_documents}
+                  </a>
                 </p>
                 {patchError && patchError.court_documents && (
                   <Error>{patchError.court_documents}</Error>
@@ -201,8 +207,8 @@ const ClientIdPage = () => {
                 maxLength="30"
                 defaultValue={clientInfo.credit_sum}
               />
-              {patchError && patchError.status && (
-                <Error>{patchError.status}</Error>
+              {patchError && patchError.credit_sum && (
+                <Error>{patchError.credit_sum}</Error>
               )}
             </div>
             <h2>Семейное положение:</h2>
@@ -217,8 +223,8 @@ const ClientIdPage = () => {
               <Select.Option value="widow/widower">Вдова/Вдовец</Select.Option>
               <Select.Option value="single">Холост/Незамужем</Select.Option>
             </Select>
-            {patchError && patchError.status && (
-              <Error>{patchError.status}</Error>
+            {patchError && patchError.marital_status && (
+              <Error>{patchError.marital_status}</Error>
             )}
             <h2>Кредитная история:</h2>
             <input
@@ -231,10 +237,13 @@ const ClientIdPage = () => {
               }
             />
             <p className={cl.file__name}>
-              Текущий файл : {clientInfo.credit_history}
+              Текущий файл :{" "}
+              <a href={clientInfo.credit_history}>
+                {clientInfo.credit_history}
+              </a>
             </p>
-            {patchError && patchError.status && (
-              <Error>{patchError.status}</Error>
+            {patchError && patchError.credit_history && (
+              <Error>{patchError.credit_history}</Error>
             )}
             <h2>Номер телефона:</h2>
 
@@ -246,8 +255,8 @@ const ClientIdPage = () => {
               defaultValue={clientInfo.phone}
               maxLength="100"
             />
-            {patchError && patchError.status && (
-              <Error>{patchError.status}</Error>
+            {patchError && patchError.phone && (
+              <Error>{patchError.phone}</Error>
             )}
             <h2>Адрес прописки:</h2>
 
@@ -259,8 +268,8 @@ const ClientIdPage = () => {
               name="address"
               maxLength="100"
             />
-            {patchError && patchError.status && (
-              <Error>{patchError.status}</Error>
+            {patchError && patchError.address && (
+              <Error>{patchError.address}</Error>
             )}
             <h2>Адрес фактический</h2>
 
@@ -273,21 +282,8 @@ const ClientIdPage = () => {
               name="client_actual_address"
               maxLength="100"
             />
-            {patchError && patchError.status && (
-              <Error>{patchError.status}</Error>
-            )}
-            <h2>Поручитель:</h2>
-
-            <Input
-              className={cl.counterparties__input}
-              type="text"
-              onChange={handleInput}
-              name="guarantor"
-              defaultValue={clientInfo.guarantor}
-              maxLength="100"
-            />
-            {patchError && patchError.status && (
-              <Error>{patchError.status}</Error>
+            {patchError && patchError.client_actual_address && (
+              <Error>{patchError.client_actual_address}</Error>
             )}
             <h2>Справка о доходах:</h2>
             <input
@@ -300,7 +296,10 @@ const ClientIdPage = () => {
               }
             />
             <p className={cl.file__name}>
-              Текущий файл : {clientInfo.income_statement}
+              Текущий файл :{" "}
+              <a href={clientInfo.income_statement}>
+                {clientInfo.income_statement}
+              </a>
             </p>
             {patchError && patchError.income_statement && (
               <Error>{patchError.income_statement}</Error>
@@ -317,7 +316,8 @@ const ClientIdPage = () => {
               }
             />
             <p className={cl.file__name}>
-              Текущий файл : {clientInfo.contracts}
+              Текущий файл :{" "}
+              <a href={clientInfo.contracts}>{clientInfo.contracts}</a>
             </p>
             {patchError && patchError.contracts && (
               <Error>{patchError.contracts}</Error>
@@ -332,7 +332,9 @@ const ClientIdPage = () => {
                 })
               }
             />
-            <p className={cl.file__name}>Текущий файл : {clientInfo.report}</p>
+            <p className={cl.file__name}>
+              Текущий файл : <a href={clientInfo.report}>{clientInfo.report}</a>
+            </p>
             {patchError && patchError.report && (
               <Error>{patchError.report}</Error>
             )}
@@ -348,7 +350,7 @@ const ClientIdPage = () => {
               }
             />
             <p className={cl.file__name}>
-              Текущий файл : {clientInfo.monitoring_report}
+              Текущий файл :  <a href={clientInfo.monitoring_report}>{clientInfo.monitoring_report}</a>
             </p>
             {patchError && patchError.monitoring_report && (
               <Error>{patchError.monitoring_report}</Error>
@@ -360,11 +362,11 @@ const ClientIdPage = () => {
                 showSearch
                 allowClear
                 onChange={(e) => {
-                  setState({ ...state, id_guarantor: e });
+                  setState({ ...state, guarantor: e });
                 }}
                 defaultValue={{
-                  label: clientInfo.id_guarantor,
-                  value: clientInfo.id_guarantor,
+                  label: clientInfo.guarantor,
+                  value: clientInfo.guarantor,
                 }}
                 fieldNames={{ label: "full_name", value: "id" }}
                 filterOption={(input, option) =>
@@ -376,8 +378,8 @@ const ClientIdPage = () => {
               />
               <BsPlusLg className={cl.add__svg} onClick={showModal} />
             </div>
-            {patchError && patchError.id_guarantor && (
-              <Error>{patchError.id_guarantor}</Error>
+            {patchError && patchError.guarantor && (
+              <Error>{patchError.guarantor}</Error>
             )}
             <h2>Залоговое имущество:</h2>
             <div className={cl.counterparties__flexContainer}>

@@ -36,7 +36,6 @@ const ConversationIdPage = () => {
     if (!conversationInfo) navigate("/conversations");
   }, []);
   //-------------------------------------------
-
   return (
     <Layout>
       {conversationInfo && (
@@ -50,27 +49,20 @@ const ConversationIdPage = () => {
           <h2 className={cl.title}>
             {conversationInfo.id}.{conversationInfo.name}
           </h2>
-          <div className={cl.conversations__checkboxes}>
-            <label>
-              <span>Телефонный разговор</span>
-              <input
-                type="radio"
-                name="radio"
-                value="0"
-                checked={value == "0" ? true : false}
-                onChange={changeValue}
-              />
-            </label>
-            <label>
-              <span>Очный разговор</span>
-              <input
-                type="radio"
-                name="radio"
-                value="1"
-                checked={value == "1" ? true : false}
-                onChange={changeValue}
-              />
-            </label>
+          <div className={cl.conversations__checkbox}>
+            <h2 className={cl.conversations__title}>Личная встреча: </h2>
+            <input
+              type="checkbox"
+              className={cl.conversations__checkox}
+              defaultChecked={conversationInfo.is_meeting}
+              onChange={async (e) => {
+                setState({
+                  ...state,
+                  is_meeting: e.target.checked,
+                });
+                console.log(e.target.checked);
+              }}
+            />
           </div>
           <div className={cl.conversations__category}>
             <h2 className={cl.conversations__title}>ФИО специалиста: </h2>
@@ -130,7 +122,10 @@ const ConversationIdPage = () => {
               }}
             />
             <p className={cl.file__name}>
-              Текущий файл : {conversationInfo.results_report}
+              Текущий файл :{" "}
+              <a href={conversationInfo.results_report}>
+                {conversationInfo.results_report}
+              </a>
             </p>
             {patchError && patchError.results_report && (
               <Error>{patchError.results_report}</Error>
@@ -150,7 +145,10 @@ const ConversationIdPage = () => {
               }}
             />
             <p className={cl.file__name}>
-              Текущий файл : {conversationInfo.statistics}
+              Текущий файл :{" "}
+              <a href={conversationInfo.statistics}>
+                {conversationInfo.statistics}
+              </a>
             </p>
             {patchError && patchError.statistics && (
               <Error>{patchError.statistics}</Error>

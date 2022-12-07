@@ -6,7 +6,6 @@ import conversationsSlice from "../features/conversations/conversationsSlice";
 import entitySlice from "../features/entity/entitySlice";
 import companySlise from "../features/company/companySlice";
 import guarantorsSlice from "../features/guarantors/guarantorsSlice";
-import creditSpecSlice from "../features/creditSpec/creditSpecSlice";
 import activitySlice from "../features/activity/activitySlice";
 import documentsSlice from "../features/documents/documentsSlice";
 
@@ -20,7 +19,6 @@ const store = configureStore({
     entity: entitySlice,
     activites: activitySlice,
     companies: companySlise,
-    creditSpec: creditSpecSlice,
     documents: documentsSlice,
   },
 });

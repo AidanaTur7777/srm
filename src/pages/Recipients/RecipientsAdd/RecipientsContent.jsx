@@ -41,117 +41,144 @@ const RecipientsContent = () => {
         onFinishFailed={() => alert("Заполните все поля")}
       >
         <div className={cl.recipients__content}>
-          <h2>ФИО залогодателя:</h2>
-          <Form.Item
-            name="full_name"
-            rules={[{ required: true, message: "Заполните это поле" }]}
-          >
-            <Input
-              className={cl.recipients__input}
-              type="text"
+          <div className={cl.recipients__category}>
+            <h2>ФИО залогодателя:</h2>
+            <Form.Item
               name="full_name"
-              onChange={handleInput}
-              maxLength="100"
-            />
-          </Form.Item>
-          {error && error.full_name && <Error>{error.full_name}</Error>}
-          <h2>Семейное положение:</h2>
-          <Form.Item
-            name="status"
-            rules={[{ required: true, message: "Заполните это поле" }]}
-          >
-            <Select
-              className={cl.recipients__accor}
-              onChange={(e) => setState({ ...state, status: e })}
+              rules={[{ required: true, message: "Заполните это поле" }]}
             >
-              <Select.Option value="married">Женат/Замужем</Select.Option>
-              <Select.Option value="divorced">Разведен</Select.Option>
-              <Select.Option value="widow/widower">Вдова/Вдовец</Select.Option>
-              <Select.Option value="single">Холост/Незамужем</Select.Option>
-            </Select>
-          </Form.Item>
-          {error && error.status && <Error>{error.status}</Error>}
-          <h2>Кредитная история:</h2>
-          <Form.Item
-            name="credit_history"
-            rules={[{ required: true, message: "Заполните это поле" }]}
-          >
-            <input
-              type="file"
-              onChange={(e) => {
-                setState({
-                  ...state,
-                  credit_history: e.target.files[0],
-                });
-              }}
-            />
-          </Form.Item>
-          {error && error.credit_history && (
-            <Error>{error.credit_history}</Error>
-          )}
-          <h2>Номер телефона:</h2>
-          <Form.Item
-            name="phone"
-            rules={[{ required: true, message: "Заполните это поле" }]}
-          >
-            <Input
-              className={cl.recipients__input}
-              type="text"
+              <Input
+                className={cl.recipients__input}
+                type="text"
+                name="full_name"
+                onChange={handleInput}
+                maxLength="100"
+              />
+            </Form.Item>
+            {error && error.full_name && (
+              <Error style={{ marginTop: "-20px" }}>{error.full_name}</Error>
+            )}
+          </div>
+          <div className={cl.recipients__category}>
+            <h2>Семейное положение:</h2>
+            <Form.Item
+              name="status"
+              rules={[{ required: true, message: "Заполните это поле" }]}
+            >
+              <Select
+                className={cl.recipients__accor}
+                onChange={(e) => setState({ ...state, status: e })}
+              >
+                <Select.Option value="married">Женат/Замужем</Select.Option>
+                <Select.Option value="divorced">Разведен</Select.Option>
+                <Select.Option value="widow/widower">
+                  Вдова/Вдовец
+                </Select.Option>
+                <Select.Option value="single">Холост/Незамужем</Select.Option>
+              </Select>
+            </Form.Item>
+            {error && error.status && <Error>{error.status}</Error>}
+          </div>
+          <div className={cl.recipients__category}>
+            <h2>Кредитная история:</h2>
+            <Form.Item
+              name="credit_history"
+              rules={[{ required: true, message: "Заполните это поле" }]}
+            >
+              <input
+                type="file"
+                onChange={(e) => {
+                  setState({
+                    ...state,
+                    credit_history: e.target.files[0],
+                  });
+                }}
+              />
+            </Form.Item>
+            {error && error.credit_history && (
+              <Error style={{ marginTop: "-20px" }}>
+                {error.credit_history}
+              </Error>
+            )}
+          </div>
+          <div className={cl.recipients__category}>
+            <h2>Номер телефона:</h2>
+            <Form.Item
               name="phone"
-              onChange={handleInput}
-              maxLength="30"
-            />
-          </Form.Item>
-          {error && error.phone && <Error>{error.phone}</Error>}
-          <h2>Адрес прописки:</h2>
-          <Form.Item
-            name="address"
-            rules={[{ required: true, message: "Заполните это поле" }]}
-          >
-            <Input
-              className={cl.recipients__input}
-              type="text"
+              rules={[{ required: true, message: "Заполните это поле" }]}
+            >
+              <Input
+                className={cl.recipients__input}
+                type="text"
+                name="phone"
+                onChange={handleInput}
+                maxLength="30"
+              />
+            </Form.Item>
+            {error && error.phone && (
+              <Error style={{ marginTop: "-20px" }}>{error.phone}</Error>
+            )}
+          </div>
+          <div className={cl.recipients__category}>
+            <h2>Адрес прописки:</h2>
+            <Form.Item
               name="address"
-              onChange={handleInput}
-              maxLength="100"
-            />
-          </Form.Item>
-          {error && error.address && <Error>{error.address}</Error>}
-          <h2>Адрес фактический:</h2>
-          <Form.Item
-            name="actual_address"
-            rules={[{ required: true, message: "Заполните это поле" }]}
-          >
-            <Input
-              className={cl.recipients__input}
-              type="text"
+              rules={[{ required: true, message: "Заполните это поле" }]}
+            >
+              <Input
+                className={cl.recipients__input}
+                type="text"
+                name="address"
+                onChange={handleInput}
+                maxLength="100"
+              />
+            </Form.Item>
+            {error && error.address && (
+              <Error style={{ marginTop: "-20px" }}>{error.address}</Error>
+            )}
+          </div>
+          <div className={cl.recipients__category}>
+            <h2>Адрес фактический:</h2>
+            <Form.Item
               name="actual_address"
-              onChange={handleInput}
-              maxLength="100"
-            />
-          </Form.Item>
-          {error && error.actual_address && (
-            <Error>{error.actual_address}</Error>
-          )}
-          <h2>Справка о доходах:</h2>
-          <Form.Item
-            name="income_statement"
-            rules={[{ required: true, message: "Заполните это поле" }]}
-          >
-            <input
-              type="file"
-              onChange={(e) => {
-                setState({
-                  ...state,
-                  income_statement: e.target.files[0],
-                });
-              }}
-            />
-          </Form.Item>
-          {error && error.income_statement && (
-            <Error>{error.income_statement}</Error>
-          )}
+              rules={[{ required: true, message: "Заполните это поле" }]}
+            >
+              <Input
+                className={cl.recipients__input}
+                type="text"
+                name="actual_address"
+                onChange={handleInput}
+                maxLength="100"
+              />
+            </Form.Item>
+            {error && error.actual_address && (
+              <Error style={{ marginTop: "-20px" }}>
+                {error.actual_address}
+              </Error>
+            )}
+          </div>
+          <div className={cl.recipients__category}>
+            <h2>Справка о доходах:</h2>
+            <Form.Item
+              name="income_statement"
+              rules={[{ required: true, message: "Заполните это поле" }]}
+            >
+              <input
+                type="file"
+                onChange={(e) => {
+                  setState({
+                    ...state,
+                    income_statement: e.target.files[0],
+                  });
+                }}
+              />
+            </Form.Item>
+            {error && error.income_statement && (
+              <Error>{error.income_statement}</Error>
+            )}
+          </div>
         </div>
+
         {loading && <Loading>Отправка...</Loading>}
         {error && (
           <Error style={{ fontSize: "20px" }}>

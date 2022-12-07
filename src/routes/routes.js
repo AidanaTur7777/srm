@@ -16,9 +16,9 @@ import CounterpartiesList from "../pages/Counterparties/CounterpartiesList/Count
 import CompanyIdPage from "../pages/Companies/CompanyIdPage/CompanyIdPage";
 import DocumentIdPage from "../pages/Documents/DocumentIdPage/DocumentIdPage";
 import ConversationIdPage from "../pages/Conversations/ConversationIdPage/ConversationIdPage";
-import RecipientIdPage from "../pages/Recipients/RecipientIdPage/RecipietntIdPage";
 import ClientIdPage from "../pages/Counterparties/ClientIdPage/ClientIdPage";
 import EntityIdPage from "../pages/Counterparties/EntityIdPage/EntityIdPage";
+import RecipientIdPage from "../pages/Recipients/RecipientIdPage/RecipientsIdPage";
 
 export const PrivateRoutes = () => {
   return (

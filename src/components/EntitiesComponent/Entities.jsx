@@ -57,7 +57,6 @@ const EntitiesComponent = () => {
     own_contribution: "",
     assets: "",
     current_loan: "",
-    souce_of_income: null,
     id_company: "",
     id_property: "",
     id_num_parley: "",
@@ -344,31 +343,6 @@ const EntitiesComponent = () => {
         {error && error.client_actiual_address && (
           <Error>{error.client_actiual_address}</Error>
         )}
-        <h2>Источник дохода:</h2>
-        <div className={cl.counterparties__flexContainer}>
-          <Form.Item
-            name="activites_add"
-            rules={[{ required: true, message: "Заполните это поле" }]}
-          >
-            <Select
-              className={cl.counterparties__accor}
-              showSearch
-              allowClear
-              onChange={(e) => {
-                setState({ ...state, souce_of_income: e });
-              }}
-              fieldNames={{ label: "activites_add", value: "id" }}
-              filterOption={(input, option) =>
-                (option?.activites_add.toLocaleLowerCase() ?? "").includes(
-                  input.toLocaleLowerCase()
-                )
-              }
-              options={activities && activities}
-            />
-          </Form.Item>
-          <BsPlusLg className={cl.add__svg} onClick={showModalFive} />
-        </div>
-        {error && error.activites_add && <Error>{error.activites_add}</Error>}
         <h2>Средний доход в месяц:</h2>
         <Form.Item
           name="average_salary"

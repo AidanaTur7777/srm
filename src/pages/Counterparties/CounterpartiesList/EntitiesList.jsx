@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import {
   deleteEntity,
   getEntities,
+  getEntity,
 } from "../../../features/entity/entityActions";
 import { BiSearch } from "react-icons/bi";
 import Loading from "../../../components/Loading/Loading";
@@ -49,7 +50,7 @@ const EntitiesList = () => {
   };
   const [searchValue, setSearchValue] = useState("");
   const navigateToEntity = (id) => {
-    dispatch(getEntities({ id: id })).then(() =>
+    dispatch(getEntity({ id: id })).then(() =>
       navigate(`/counterparties/entity/${id}`)
     );
   };

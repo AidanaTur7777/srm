@@ -25,7 +25,7 @@ const Registration = () => {
   };
   useEffect(() => {
     if (registerSuccess) navigate("/login");
-  },[registerSuccess]);
+  }, [registerSuccess]);
   return (
     <div className={cl.registration}>
       <form
@@ -41,6 +41,9 @@ const Registration = () => {
             {...register("full_name")}
             required
           />
+          {registerError && registerError.full_name && (
+            <Error>{registerError.full_name}</Error>
+          )}
         </div>
         <div className={cl.registration__row}>
           <h4 className={cl.title}>Номер телефона:</h4>
@@ -50,6 +53,9 @@ const Registration = () => {
             {...register("phone_number")}
             required
           />
+          {registerError && registerError.phone_number && (
+            <Error>{registerError.phone_number}</Error>
+          )}
         </div>
         <div className={cl.registration__row}>
           <h4 className={cl.title}>Должность:</h4>
@@ -61,6 +67,9 @@ const Registration = () => {
               Кредититный спец
             </option>
           </select>
+          {registerError && registerError.occupation && (
+            <Error>{registerError.occupation}</Error>
+          )}
         </div>
 
         <div className={cl.registration__row}>
@@ -71,6 +80,9 @@ const Registration = () => {
             required
             className={cl.input}
           />
+          {registerError && registerError.email && (
+            <Error>{registerError.email}</Error>
+          )}
         </div>
         <div className={cl.registration__row}>
           <h4 className={cl.title}>Пароль:</h4>
@@ -80,6 +92,9 @@ const Registration = () => {
             {...register("password")}
             required
           />
+          {registerError && registerError.password && (
+            <Error>{registerError.password}</Error>
+          )}
         </div>
         <div className={cl.registration__row}>
           <h4 className={cl.title}> Подтвердить пароль:</h4>
@@ -89,16 +104,21 @@ const Registration = () => {
             {...register("password_confirm")}
             required
           />
+          {registerError && registerError.password_confirm && (
+            <Error>{registerError.password_confirm}</Error>
+          )}
+          {registerError && registerError.non_field_errors && (
+            <Error>{registerError.non_field_errors}</Error>
+          )}
         </div>
         <div className={cl.link}>
           <NavLink to="/login">Войти</NavLink>
         </div>
         {registerLoading && <Loading>Загрузка...</Loading>}
         {registerSuccess && <Success>Вы были успешно зарегестрированы</Success>}
-        {registerError &&
-          Object.values(registerError).map((item) => (
-            <Error style={{ fontSize: "20px" }}>{item}</Error>
-          ))}
+        {registerError && Number.isInteger(registerError) && (
+          <Error style={{ fontSize: "20px" }}>{registerError}</Error>
+        )}
         <Button type="submit" disabled={registerLoading}>
           Зарегистрироваться
         </Button>

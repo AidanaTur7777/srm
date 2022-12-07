@@ -52,7 +52,7 @@ const Login = () => {
           (error.response.data ? (
             Object.keys(error.response.data).map((item) => (
               <Error style={{ fontSize: "24px" }}>
-                {error.response.data.detail}
+                {error.response.data[item]}
               </Error>
             ))
           ) : (

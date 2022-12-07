@@ -21,7 +21,6 @@ export const fetchEntities = createAsyncThunk(
       own_contribution,
       assets,
       current_loan,
-      souce_of_income,
       id_company,
       id_property,
       id_num_parley,
@@ -37,7 +36,7 @@ export const fetchEntities = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/crm/api/entity/`,
+        `http://127.0.0.1:8000/crm/api/entity/`,
         {
           id_credit_spec,
           client_company,
@@ -55,7 +54,6 @@ export const fetchEntities = createAsyncThunk(
           own_contribution,
           assets,
           current_loan,
-          souce_of_income,
           id_company,
           id_property,
           id_num_parley,
@@ -84,7 +82,7 @@ export const patchEntity = createAsyncThunk(
       };
 
       const { data } = await axios.patch(
-        `https://baitushumdemo.herokuapp.com/crm/api/entity/${id}/`,
+        `http://127.0.0.1:8000/crm/api/entity/${id}/`,
         obj,
         config
       );
@@ -98,17 +96,19 @@ export const patchEntity = createAsyncThunk(
     }
   }
 );
+
 export const getEntity = createAsyncThunk(
-  "entity/get",
+  "entityGet",
   async ({ id }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       };
+      console.log("heloo");
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/entity/${id}/`,
+        `http://127.0.0.1:8000/crm/api/entity/${id}/`,
         config
       );
       return data;
@@ -131,7 +131,7 @@ export const getEntities = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/entity/`,
+        `http://127.0.0.1:8000/crm/api/entity/`,
         config
       );
       return data;
@@ -155,7 +155,7 @@ export const deleteEntity = createAsyncThunk(
         },
       };
       const { data } = await axios.delete(
-        `https://baitushumdemo.herokuapp.com/crm/api/entity/${id}/`,
+        `http://127.0.0.1:8000/crm/api/entity/${id}/`,
         {
           id,
         },

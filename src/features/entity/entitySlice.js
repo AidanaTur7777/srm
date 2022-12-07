@@ -78,6 +78,7 @@ const entitySlice = createSlice({
     [getEntity.fulfilled]: (state, { payload }) => {
       state.getLoading = false;
       state.entityInfo = payload;
+      state.getError = null;
     },
     [getEntity.rejected]: (state, { payload }) => {
       state.getLoading = false;

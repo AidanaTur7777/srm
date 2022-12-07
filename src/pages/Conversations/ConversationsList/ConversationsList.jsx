@@ -12,13 +12,14 @@ import {
 import { BiSearch } from "react-icons/bi";
 import Loading from "../../../components/Loading/Loading";
 import Success from "../../../components/Success/Success";
+import Error from "../../../components/Error/Error";
 const ConversationsList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getConversations());
   }, [dispatch]);
-  const { conversations, deleteLoading, deleteSuccess } = useSelector(
+  const { conversations, deleteLoading, deleteSuccess, deleteError } = useSelector(
     (state) => state.conversations
   );
   const [conversationsList, setConversationsList] = useState(
@@ -83,8 +84,9 @@ const ConversationsList = () => {
               Удалить
             </button>
           </div>
-          {deleteSuccess && <Success>Документы были успешно удалены</Success>}
+          {deleteSuccess && <Success>Данные были успешно удалены</Success>}
           {deleteLoading && <Loading>Удаление...</Loading>}
+          {deleteError && <Error>Произошла ошибка при удалении...</Error> }
           <div className={cl.content__list}>
             {conversationsList && (
               <Table>

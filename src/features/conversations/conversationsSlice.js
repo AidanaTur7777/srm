@@ -32,15 +32,18 @@ const conversationsSlice = createSlice({
   extraReducers: {
     [fetchConversations.pending]: (state) => {
       state.loading = true;
+      state.success = false;
       state.error = null;
     },
     [fetchConversations.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.success = true;
+      state.error = null;
     },
     [fetchConversations.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      state.success = false;
     },
     [getConversations.pending]: (state) => {
       state.getLoading = true;

@@ -161,7 +161,7 @@ const DocumentAdd = () => {
             <div className={cl.documents__select__container}>
               <Form.Item
                 name="id_client"
-                rules={[{ required: true, message: "Заполните это поле" }]}
+                //rules={[{ required: true, message: "Заполните это поле" }]}
               >
                 <Select
                   showSearch
@@ -188,7 +188,7 @@ const DocumentAdd = () => {
             <div className={cl.documents__select__container}>
               <Form.Item
                 name="id_entity"
-                rules={[{ required: true, message: "Заполните это поле" }]}
+                //rules={[{ required: true, message: "Заполните это поле" }]}
               >
                 <Select
                   showSearch

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchActivites,
   getActivities,
 } from "../../features/activity/activityActions";
 import Button from "../Button/Button";
+import Loading from "../Loading/Loading";
+import Success from "../Success/Success";
 import cl from "./Actives.module.scss";
 
 const Activites = () => {
   const dispatch = useDispatch();
+  const { success, loading, error } = useSelector((state) => state.activites);
   useEffect(() => {
     dispatch(fetchActivites());
   }, [dispatch]);
@@ -38,6 +41,9 @@ const Activites = () => {
         name="activites_add"
         required
       />
+      {success && <Success>Данные были успешно отправлены</Success>}
+      {loading && <Loading>Загрузка...</Loading>}
+      {error && <Success>Данные не были отправлены</Success>}
       <Button>Submit</Button>
     </form>
   );

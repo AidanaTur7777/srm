@@ -42,6 +42,25 @@
       }
     }
   }
+  .conversations__checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+    margin-top: 60px;
+    margin-bottom: -10px;
+    .conversations__title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
+    input{
+      width: 25px;
+      height: 25px;
+      margin-left: 25px;
+    }
+    
+  }
   .conversations__category {
     width: 482px;
     margin-top: 50px;

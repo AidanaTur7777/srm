@@ -25,7 +25,7 @@ export const fetchDocuments = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/crm/api/dataKK/`,
+        `http://127.0.0.1:8000/crm/api/dataKK/`,
         {
           credit_spec_report,
           committee_decision,
@@ -39,7 +39,6 @@ export const fetchDocuments = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response && error.response.data) {
-        console.log(error);
         return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue(error.message);
@@ -58,7 +57,7 @@ export const patchDocument = createAsyncThunk(
       };
 
       const { data } = await axios.patch(
-        `https://baitushumdemo.herokuapp.com/crm/api/dataKK/${id}/`,
+        `http://127.0.0.1:8000/crm/api/dataKK/${id}/`,
         obj,
         config
       );
@@ -82,7 +81,7 @@ export const getDocuments = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/dataKK/`,
+        `http://127.0.0.1:8000/crm/api/dataKK/`,
         config
       );
       return data;
@@ -106,7 +105,7 @@ export const getDocument = createAsyncThunk(
       };
       console.log(id);
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/dataKK/${id}/`,
+        `http://127.0.0.1:8000/crm/api/dataKK/${id}/`,
         config
       );
       return data;
@@ -129,7 +128,7 @@ export const deleteDocument = createAsyncThunk(
         },
       };
       const { data } = await axios.delete(
-        `https://baitushumdemo.herokuapp.com/crm/api/dataKK/${id}/`,
+        `http://127.0.0.1:8000/crm/api/dataKK/${id}/`,
         {
           id,
         },

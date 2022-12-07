@@ -14,7 +14,7 @@ export const fetchConversations = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `https://baitushumdemo.herokuapp.com/crm/api/convers/`,
+        `http://127.0.0.1:8000/crm/api/convers/`,
         {
           is_meeting,
           name,
@@ -47,7 +47,7 @@ export const patchConversation = createAsyncThunk(
       };
 
       const { data } = await axios.patch(
-        `https://baitushumdemo.herokuapp.com/crm/api/convers/${id}/`,
+        `http://127.0.0.1:8000/crm/api/convers/${id}/`,
         obj,
         config
       );
@@ -71,7 +71,7 @@ export const getConversation = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/convers/${id}/`,
+        `http://127.0.0.1:8000/crm/api/convers/${id}/`,
         config
       );
       return data;
@@ -95,7 +95,7 @@ export const getConversations = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `https://baitushumdemo.herokuapp.com/crm/api/convers/`,
+        `http://127.0.0.1:8000/crm/api/convers/`,
         config
       );
       return data;
@@ -119,7 +119,7 @@ export const deleteConversation = createAsyncThunk(
         },
       };
       const { data } = await axios.delete(
-        `https://baitushumdemo.herokuapp.com/crm/api/convers/${id}/`,
+        `http://127.0.0.1:8000/crm/api/convers/${id}/`,
         {
           id,
         },
