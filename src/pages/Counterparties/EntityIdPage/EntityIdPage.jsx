@@ -46,13 +46,12 @@ const EntityIdPage = () => {
   const navigate = useNavigate();
   
   const submitForm = () => {
-    dispatch(patchEntity(state)).then(() => dispatch(getEntities()));
+    dispatch(patchEntity({ id: entityInfo.id, obj: state })).then(() => dispatch(getEntities()));
   };
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
   useEffect(() => {
-    console.log(entityInfo);
     if (!entityInfo) navigate("/counterparties");
   }, []);
   //-------------------------------------------
@@ -220,13 +219,12 @@ const EntityIdPage = () => {
             {patchError && patchError.status && (
               <Error>{patchError.status}</Error>
             )}
-            {state.status == "payback" && (
+            {entityInfo.status == "payback" && (
               <>
                 <h2>Отступные документы:</h2>
 
                 <input
                   type="file"
-                  defaultValue={entityInfo}
                   onChange={(e) =>
                     setState({
                       ...state,
@@ -245,13 +243,12 @@ const EntityIdPage = () => {
                 )}
               </>
             )}
-            {state.status == "judicial" && (
+            {entityInfo.status == "judicial" && (
               <>
                 <h2>Судебные документы:</h2>
 
                 <input
                   type="file"
-                  defaultValue={entityInfo}
                   onChange={(e) =>
                     setState({
                       ...state,
@@ -326,7 +323,7 @@ const EntityIdPage = () => {
             {patchError && patchError.client_actiual_address && (
               <Error>{patchError.client_actiual_address}</Error>
             )}
-            
+
             <h2>Средний доход в месяц:</h2>
             <Input
               className={cl.counterparties__input}

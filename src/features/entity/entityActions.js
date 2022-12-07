@@ -73,7 +73,7 @@ export const fetchEntities = createAsyncThunk(
 );
 export const patchEntity = createAsyncThunk(
   "entity/patch",
-  async ({ obj, id }, { rejectWithValue }) => {
+  async ({ id, obj }, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
